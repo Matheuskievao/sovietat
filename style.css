@@ -1,0 +1,69 @@
+.header-spotify-player {
+  /* Começa escondido, será mostrado pelo container pai em 'lg' */
+  /* ^ Comentário útil, mas a lógica de esconder/mostrar está no HTML/Tailwind */
+  display: inline-flex; /* Correto para alinhar itens internos */
+  align-items: center;  /* Correto para alinhar verticalmente ícone/equalizador */
+  gap: 6px;           /* Bom espaçamento */
+  padding: 5px 10px;    /* Bom preenchimento para o tamanho */
+  background-color: rgba(40, 40, 40, 0.5); /* Ok, fundo escuro semi-transparente */
+  border-radius: 50px; /* Cria a forma de pílula, ok */
+  border: 1px solid rgba(80, 80, 80, 0.5); /* Borda sutil, ok. Verificar contraste com fundo do header */
+  text-decoration: none; /* Essencial se for um link <a> */
+  transition: background-color 0.2s ease-in-out; /* Boa transição suave */
+  vertical-align: middle; /* Tenta alinhar melhor com outros itens do header */
+  /* ^ Pode ser útil dependendo do contexto do header. Se o header for flex, align-items: center no pai pode ser mais eficaz. Mas não prejudica. */
+}
+
+.header-spotify-player:hover {
+  background-color: rgba(60, 60, 60, 0.7); /* Mudança sutil no hover, bom */
+}
+
+/* Estilo do Ícone SVG dentro do player */
+.header-spotify-player .icon-spotify {
+  width: 16px;          /* Tamanho definido, bom */
+  height: 16px;
+  flex-shrink: 0;     /* Importante para não encolher */
+  display: block;       /* Boa prática para SVGs/imagens para evitar espaços extras */
+}
+
+/* FORÇANDO a cor no 'path' do SVG - Importante! */
+.header-spotify-player .icon-spotify path {
+  fill: #1DB954; /* VERDE SPOTIFY - Garante a cor, OK para branding */
+  /* Se preferir o roxo da sua marca E tiver certeza que a variável está definida: */
+  /* fill: var(--soviet-purple, #5b00db); */ /* Alternativa com variável CSS */
+  /* ^ Ponto Chave: Forçar a cor aqui (`fill`) ignora qualquer `fill="currentColor"` no SVG.
+     Se a intenção é SEMPRE verde Spotify, está ótimo.
+     Se quisesse flexibilidade para herdar a cor do texto (`color`), o ideal seria ter `fill="currentColor"` no SVG e remover esta regra CSS ou usar `fill: currentColor;` aqui.
+     Para um player Spotify, forçar o verde é geralmente a intenção. */
+}
+
+/* Container do Equalizador animado */
+.header-spotify-player .equalizer-animation {
+  display: flex;         /* Correto para barras */
+  align-items: flex-end; /* Essencial para animar da base para cima */
+  height: 12px;          /* Altura definida da animação */
+  gap: 2px;            /* Espaçamento entre barras */
+}
+
+/* Barras individuais do Equalizador */
+.header-spotify-player .equalizer-animation span {
+  display: inline-block; /* Correto para aplicar W/H/Transform */
+  width: 2px;           /* Barras finas */
+  background-color: #1DB954; /* Cor consistente com ícone */
+  /* background-color: var(--soviet-purple, #5b00db); */ /* Alternativa com variável */
+  border-radius: 1px;   /* Suaviza as pontas, bom detalhe */
+  animation: spotify-bar-pulse 1.5s infinite ease-in-out; /* Aplica a animação */
+}
+
+/* Animação escalonada para as barras */
+.header-spotify-player .equalizer-animation span:nth-child(1) { animation-delay: 0.1s; }
+.header-spotify-player .equalizer-animation span:nth-child(2) { animation-delay: 0.3s; }
+.header-spotify-player .equalizer-animation span:nth-child(3) { animation-delay: 0s; }
+/* ^ Bom uso de nth-child para criar o efeito dinâmico */
+
+/* Animação das barras */
+@keyframes spotify-bar-pulse {
+  0%, 100% { transform: scaleY(0.2); opacity: 0.5; } /* Estado "baixo" */
+  50% { transform: scaleY(1.0); opacity: 1; }    /* Estado "alto" */
+}
+/* ^ Animação bem definida usando transform e opacity (bom para performance) */

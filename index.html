@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src='https://cdn.tailwindcss.com/3.2.0'></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Sora:wght@600&display=swap" rel="stylesheet">
+
+  <title>Soviet At</title>
+
+  <style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #000000;
+        color: #ffffff;
+        overflow-x: hidden;
+    }
+    .font-sora-semibold {
+        font-family: 'Sora', sans-serif;
+        font-weight: 600;
+    }
+    .hero-gradient::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.86) 32%, rgba(0, 0, 0, 0.4) 70%, rgba(0, 0, 0, 0) 100%);
+        z-index: 1;
+    }
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+    .quote-section {
+        text-align: center; padding: 4rem 1rem; max-width: 1100px; margin: 3rem auto;
+        font-size: 1.5rem; line-height: 2.5rem; font-weight: 600; letter-spacing: 1px;
+        border-top: 1px solid #333; border-bottom: 1px solid #333;
+    }
+    footer a:not(.social-icon):hover { text-decoration: underline; opacity: 0.8; transition: opacity 0.2s ease-in-out; }
+    footer .social-icon:hover { opacity: 0.8; transform: scale(1.1); transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out; }
+    .swiper-container { width: 100%; position: relative; padding-bottom: 60px; overflow: hidden; }
+    .swiper-wrapper { display: flex; }
+    .swiper-slide { height: auto; flex-shrink: 0; width: auto; display: flex; flex-direction: column; }
+    .swiper-slide > a, .swiper-slide > div:first-child { display: flex; flex-direction: column; height: 100%; width: 100%; }
+    .swiper-slide .card-content-wrapper { flex-grow: 1; display: flex; flex-direction: column; }
+    .swiper-button-next, .swiper-button-prev {
+        color: #ffffff; background-color: rgba(0, 0, 0, 0.3); border-radius: 50%;
+        width: 44px; height: 44px; transition: background-color 0.3s ease;
+        position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
+    }
+    .swiper-button-next:hover, .swiper-button-prev:hover { background-color: rgba(0, 0, 0, 0.6); }
+    .swiper-button-next::after, .swiper-button-prev::after { font-size: 18px; font-weight: bold; }
+    .swiper-button-prev { left: 15px; }
+    .swiper-button-next { right: 15px; }
+    .swiper-pagination { position: absolute; bottom: 15px; left: 0; width: 100%; text-align: center; z-index: 10; pointer-events: auto; }
+    .swiper-pagination-bullet { background-color: #a0a0a0; opacity: 1; transition: background-color 0.3s ease; width: 10px; height: 10px; margin: 0 5px !important; display: inline-block; }
+    .swiper-pagination-bullet-active { background-color: var(--soviet-purple, #5b00db); }
+    .swiper-pagination-clickable .swiper-pagination-bullet { cursor: pointer; }
+    .aspect-w-16 { position: relative; padding-bottom: 56.25%; }
+    .aspect-h-9 { height: 0; }
+    .aspect-w-16 > iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    @keyframes pulse-logo { 0%, 100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.03); opacity: 1; } }
+    .animate-logo-pulse { animation: pulse-logo 4s ease-in-out infinite; }
+    .header-spotify-player { display: inline-flex; align-items: center; background-color: rgba(40, 40, 40, 0.5); padding: 5px 10px; border-radius: 50px; border: 1px solid rgba(80, 80, 80, 0.5); gap: 6px; transition: background-color 0.3s ease; text-decoration: none; vertical-align: middle; }
+    .header-spotify-player:hover { background-color: rgba(60, 60, 60, 0.7); }
+    .icon-spotify { width: 16px; height: 16px; flex-shrink: 0; }
+    .icon-spotify path { fill: #1DB954; }
+    .equalizer-animation { display: flex; align-items: flex-end; height: 12px; gap: 2px; }
+    .equalizer-animation span { display: block; width: 2px; background-color: #1DB954; animation: equalize 1.2s infinite ease-in-out; border-radius: 1px; }
+    .equalizer-animation span:nth-child(1) { height: 60%; animation-delay: -0.9s; }
+    .equalizer-animation span:nth-child(2) { height: 100%; animation-delay: -0.6s; }
+    .equalizer-animation span:nth-child(3) { height: 40%; animation-delay: -0.3s; }
+    @keyframes equalize { 0%, 100% { transform: scaleY(0.3); opacity: 0.5; } 50% { transform: scaleY(1); opacity: 1; } }
+    :root {
+        --soviet-purple: #5b00db; --soviet-blue: #0077ff; --soviet-gray-light: #d1d1db;
+        --soviet-gray-medium: #737373; --soviet-gray-dark: #1e1d1d; --soviet-footer-link: #afafc0;
+        --soviet-footer-border: #5e5e78; --spotify-green: #1DB954;
+    }
+  </style>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { poppins: ['Poppins', 'sans-serif'], sora: ['Sora', 'sans-serif'] },
+          colors: {
+            'soviet-purple': 'var(--soviet-purple)', 'soviet-blue': 'var(--soviet-blue)',
+            'soviet-gray-light': 'var(--soviet-gray-light)', 'soviet-gray-medium': 'var(--soviet-gray-medium)',
+            'soviet-gray-dark': 'var(--soviet-gray-dark)', 'soviet-footer-link': 'var(--soviet-footer-link)',
+            'soviet-footer-border': 'var(--soviet-footer-border)',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-black text-white font-poppins">
+
+    <header class="sticky top-0 z-50 bg-black bg-opacity-80 backdrop-blur-sm shadow-md py-4">
+      <div class="container mx-auto px-6 flex justify-between items-center">
+        <a href="./index.html" class="flex items-center space-x-2 flex-shrink-0">
+          <img class="w-auto h-8 md:h-10 animate-logo-pulse" src="img/metalic-logo-mockup-10.png" alt="Soviet At Logo" />
+        </a>
+        <div class="hidden lg:flex items-center space-x-6">
+            <nav class="flex items-center space-x-6 text-sm tracking-[1.5px]">
+              <a href="./index.html#home" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">HOME</a>
+              <a href="./index.html#merch" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">MERCH</a>
+              <a href="./index.html#about" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">ABOUT</a>
+              <a href="./tour.html" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">TOUR</a>
+              <a href="./contact.html" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">CONTACT</a>
+              <a href="https://sovietat.com.br/sovietrecords" class="text-soviet-blue opacity-70 hover:opacity-100 transition-opacity duration-300">SOVIETRECORDS</a>
+            </nav>
+            <a href="https://open.spotify.com/track/3QNQQPYQjESv0AC19TL0aw" target="_blank" rel="noopener noreferrer" class="header-spotify-player" title="Listen on Spotify">
+                  <svg class="icon-spotify" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Spotify</title><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm6.214 17.51c-.204.32-.58.433-.9.232-2.637-1.623-5.902-1.99-10.165-1.087-.39.09-.76-.126-.848-.514-.09-.39.126-.76.514-.848C11.47 14.39 15.11 14.794 18.08 16.64c.32.2.434.58.233.9zm.877-2.364c-.247.386-.7.517-1.086.27-3.04-1.86-7.015-2.41-11.61-.126-.454.09-.91-.16-.998-.616-.09-.455.16-.91.615-.998 5.137-2.496 9.596-1.84 12.99 1.454.386.246.516.7.27 1.086zm.11-2.58c-.31.473-.876.617-1.35.307C14.28 10.69 9.75 10.376 5.756 11.54c-.51.153-1.043-.12-1.195-.633-.153-.51.12-1.044.633-1.196 4.573-1.366 9.724-1.016 13.96 1.687.473.31.616.877.306 1.35z"/></svg>
+                  <div class="equalizer-animation">
+                      <span></span><span></span><span></span>
+                  </div>
+            </a>
+         </div>
+         <div class="lg:hidden">
+            <button id="mobile-menu-button" class="text-white focus:outline-none">
+               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+         </div>
+      </div>
+       <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-black bg-opacity-90 backdrop-blur-sm py-4">
+           <nav class="flex flex-col items-center space-y-4 text-sm tracking-[1.5px]">
+              <a href="./index.html#home" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">HOME</a>
+              <a href="./index.html#merch" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">MERCH</a>
+              <a href="./index.html#about" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">ABOUT</a>
+              <a href="./tour.html" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">TOUR</a>
+              <a href="./contact.html" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">CONTACT</a>
+              <a href="https://sovietat.com.br/sovietrecords" class="text-soviet-blue opacity-70 hover:opacity-100 transition-opacity duration-300">SOVIETRECORDS</a>
+            </nav>
+       </div>
+    </header>
+
+  <main>
+
+    <section id="home" class="relative h-[700px] md:h-[974px] w-full flex items-center overflow-hidden">
+        <img class="absolute inset-0 w-full h-full object-cover object-center z-0" src="img/img0.svg" alt="Band background"/>
+        <div class="hero-gradient"></div>
+        <div class="container mx-auto px-6 lg:px-20 hero-content relative z-10" data-aos="fade-right">
+           <div class="max-w-xl text-white">
+                <img class="w-48 md:w-64 h-auto mb-8" src="img/metalic-logo-mockup-20.png" alt="Soviet At Logo Large" data-aos="zoom-in" data-aos-delay="100"/>
+                <h1 class="text-4xl md:text-6xl font-semibold mb-4 leading-tight" data-aos="fade-right" data-aos-delay="200">
+                  Amazon's best punk post
+                </h1>
+                <p class="text-lg md:text-xl opacity-80 mb-8" data-aos="fade-right" data-aos-delay="300">
+                    Dive into the world of Soviet At. Explore our music, tour dates, and latest releases.
+                </p>
+                <!-- AJUSTE RESPONSIVO APLICADO ABAIXO -->
+                <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4" data-aos="fade-up" data-aos-delay="400">
+                    <a href="#upcoming-dates" class="bg-soviet-purple hover:bg-opacity-80 text-white font-semibold py-3 px-6 rounded transition duration-300 text-center">
+                        View Tour Dates
+                    </a>
+                    <a href="https://sovietat.bandcamp.com/album/sadness-boys?search_item_id=1664302822&search_item_type=b&search_match_part=%3F&search_page_id=4222365905&search_page_no=1&search_rank=1&search_sig=fc950ac09e008b65a5c241438b76751b" target="_blank" rel="noopener noreferrer" class="border border-white hover:bg-white hover:text-black text-white font-semibold py-3 px-6 rounded transition duration-300 text-center">
+                        Bandcamp
+                    </a>
+                </div>
+                 <p class="mt-20 md:mt-32 text-base md:text-lg font-semibold italic opacity-90 tracking-wider max-w-2xl" data-aos="fade-up" data-aos-delay="500">
+                    ‘’Soviet At's music has such an enigmatic and captivating aura that it makes you want to be inside that universe, as if you were part of the sonic spell itself.‘’
+                 </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 md:py-32 bg-black">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-4xl md:text-5xl font-semibold mb-6" data-aos="fade-up">Meet the Soviet At</h2>
+        <p class="text-lg text-soviet-gray-medium max-w-3xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="100">
+         The <b>Soviet At</b> is a Post-Punk band from Manaus, formed in 2020. Since the beginning, the band has stood out
+         for its constant search for new musical inspirations, with the permanence of keyboardist <b>David Sutter</b> since
+         its formation. In 2020, vocalist <b>Matheus Kiev</b> had his first contact with post-punk, especially the doomer
+         subgenre, which resulted in the creation of tracks like "Suicide Disorder".<br><br>
+         Beyond its musical journey, <b>Soviet At</b> also stands out for its contribution to the independent scene in Manaus.
+         The band has created its own <b>music distribution label</b> with the goal of supporting other local bands at no cost
+          to them. This label aims to help launch and promote the first single of new bands in the city, offering them the opportunity
+          to reach a larger audience and gain visibility in the music scene. This movement has sparked a wave of innovation, and <b>Soviet At</b>
+           is bringing fresh energy to Manaus, a city where the alternative music scene is still developing.<br><br>
+           For 2025, the band is excited about new projects and already anticipates the emergence of two new bands directly influenced by Soviet At's
+           work, marking an important step in the evolution of the local Gothic music scene. The band believes that 2025 will be a decisive year, both
+           for the growth of its own project and for the Manaus music scene as a whole.
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 max-w-5xl mx-auto mb-20 text-left" data-aos="fade-up" data-aos-delay="200">
+           <div class="stat-item"><div class="text-soviet-purple text-4xl font-semibold">264</div><div class="text-soviet-gray-medium text-base mt-1">Seguidores Tiktok</div></div>
+           <div class="stat-item"><div class="text-soviet-purple text-4xl font-semibold">550</div><div class="text-soviet-gray-medium text-base mt-1">Seguidores Youtube</div></div>
+           <div class="stat-item"><div class="text-soviet-purple text-4xl font-semibold">1640</div><div class="text-soviet-gray-medium text-base mt-1">Seguidores instagram</div></div>
+           <div class="stat-item"><div class="text-soviet-purple text-4xl font-semibold">0</div><div class="text-soviet-gray-medium text-base mt-1">Videoclip</div></div>
+           <div class="stat-item"><div class="text-soviet-purple text-4xl font-semibold">16</div><div class="text-soviet-gray-medium text-base mt-1">Projetos Lançados</div></div>
+           <div class="stat-item"><div class="text-soviet-purple text-4xl font-semibold">4 ano</div><div class="text-soviet-gray-medium text-base mt-1">Years Experience</div></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto">
+            <div class="swiper-container" id="team-swiper" data-aos="fade-up" data-aos-delay="300">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <div class="relative group overflow-hidden rounded-lg shadow-lg h-full bg-soviet-gray-dark">
+                    <img src="img/group-101.svg" alt="Augusto Severo - Bass" class="w-full h-[400px] md:h-[450px] object-cover transform group-hover:scale-105 transition-transform duration-300"/>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/80 to-transparent">
+                      <h3 class="text-white text-lg font-medium tracking-wider">Augusto Severo</h3><p class="text-sm text-gray-300 font-black uppercase">Bass</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="relative group overflow-hidden rounded-lg shadow-lg h-full bg-soviet-gray-dark">
+                    <img src="img/group-100.svg" alt="Luandro Garcia - Drummer" class="w-full h-[400px] md:h-[450px] object-cover transform group-hover:scale-105 transition-transform duration-300"/>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/80 to-transparent">
+                      <h3 class="text-white text-lg font-medium tracking-wider">Luandro Garcia</h3><p class="text-sm text-gray-300 font-black uppercase">Drummer</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="relative group overflow-hidden rounded-lg shadow-lg h-full bg-soviet-gray-dark">
+                    <img src="img/group-102.svg" alt="Matheuskiev - Singer" class="w-full h-[400px] md:h-[450px] object-cover transform group-hover:scale-105 transition-transform duration-300"/>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/80 to-transparent">
+                      <h3 class="text-white text-lg font-medium tracking-wider">Matheuskiev</h3><p class="text-sm text-gray-300 font-black uppercase">Singer</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="relative group overflow-hidden rounded-lg shadow-lg h-full bg-soviet-gray-dark">
+                    <img src="img/group-103.svg" alt="David Sutter - Synth" class="w-full h-[400px] md:h-[450px] object-cover transform group-hover:scale-105 transition-transform duration-300"/>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/80 to-transparent">
+                      <h3 class="text-white text-lg font-medium tracking-wider">David Sutter</h3><p class="text-sm text-gray-300 font-black uppercase">Synth</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="relative group overflow-hidden rounded-lg shadow-lg h-full bg-soviet-gray-dark">
+                    <img src="img/kernel.jpg" alt="Roger Kernel - Guitar" class="w-full h-[400px] md:h-[450px] object-cover transform group-hover:scale-105 transition-transform duration-300"/>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/80 to-transparent">
+                      <h3 class="text-white text-lg font-medium tracking-wider">Roger Kernel</h3>
+                      <p class="text-sm text-gray-300 font-black uppercase">Guitar</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-pagination"></div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="upcoming-dates" class="py-20 md:py-24 bg-black">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-semibold text-center mb-12 md:mb-16 tracking-wider" data-aos="fade-up">
+          Upcoming Shows
+        </h2>
+        <div class="max-w-4xl mx-auto space-y-5">
+           <div class="border-b border-gray-700 py-6 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 hover:bg-gray-900/30 transition-colors duration-300 rounded-md px-4" data-aos="fade-up" data-aos-delay="100">
+             <div class="flex items-center gap-4 md:gap-6 text-center md:text-left min-w-[180px]">
+               <div class="text-5xl font-semibold w-16 text-center shrink-0">12</div>
+               <div class="grow">
+                 <div class="text-base font-semibold tracking-wider uppercase">April</div>
+                 <div class="text-base font-semibold tracking-wider text-gray-400">2025</div>
+               </div>
+             </div>
+             <div class="flex-grow text-center md:text-left">
+                <div class="text-lg md:text-xl font-semibold tracking-wider">BAR DO CABELO</div>
+                <div class="text-sm text-gray-400 tracking-wider">Manaus - AM - 00:00 AM - R. Marquesa de Santos, 47 - Coroado</div>
+             </div>
+             <a href="https://www.instagram.com/bar_do_cabelo/" target="_blank" rel="noopener noreferrer" class="bg-soviet-purple hover:bg-opacity-80 text-white text-sm font-semibold uppercase py-3 px-6 rounded transition duration-300 tracking-wider w-full md:w-auto shrink-0 text-center">FREE Tickets</a>
+           </div>
+           <div class="border-b border-gray-700 py-6 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 hover:bg-gray-900/30 transition-colors duration-300 rounded-md px-4" data-aos="fade-up" data-aos-delay="150">
+             <div class="flex items-center gap-4 md:gap-6 text-center md:text-left min-w-[180px]">
+               <div class="text-5xl font-semibold w-16 text-center shrink-0">9</div>
+               <div class="grow"> <div class="text-base font-semibold tracking-wider uppercase">APRIL</div> <div class="text-base font-semibold tracking-wider text-gray-400">2025</div> </div>
+             </div>
+             <div class="flex-grow text-center md:text-left"> <div class="text-lg md:text-xl font-semibold tracking-wider">TERTULIA AMAZONICA</div> <div class="text-sm text-gray-400 tracking-wider">Manaus - AM - 00:00</div> </div>
+             <a href="https://www.youtube.com/@tertuliaamazonicaoficial8446" target="_blank" rel="noopener noreferrer" class="bg-soviet-purple hover:bg-opacity-80 text-white text-sm font-semibold uppercase py-3 px-6 rounded transition duration-300 tracking-wider w-full md:w-auto shrink-0 text-center">LIVE PODCAST</a>
+           </div>
+           <div class="border-b border-gray-700 py-6 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 hover:bg-gray-900/30 transition-colors duration-300 rounded-md px-4" data-aos="fade-up" data-aos-delay="150">
+             <div class="flex items-center gap-4 md:gap-6 text-center md:text-left min-w-[180px]">
+               <div class="text-5xl font-semibold w-16 text-center shrink-0">19</div>
+                <div class="grow"> <div class="text-base font-semibold tracking-wider uppercase">APRIL</div> <div class="text-base font-semibold tracking-wider text-gray-400">2025</div> </div>
+             </div>
+             <div class="flex-grow text-center md:text-left"> <div class="text-lg md:text-xl font-semibold tracking-wider">GRINGOS BAR</div> <div class="text-sm text-gray-400 tracking-wider">Manaus - AM - 00:00 AM - Av. Eduardo Ribeiro, 926</div> </div>
+             <a href="#" target="_blank" rel="noopener noreferrer" class="bg-soviet-purple hover:bg-opacity-80 text-white text-sm font-semibold uppercase py-3 px-6 rounded transition duration-300 tracking-wider w-full md:w-auto shrink-0 text-center">FREE Tickets</a>
+           </div>
+           <div class="border-b border-gray-700 py-6 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 hover:bg-gray-900/30 transition-colors duration-300 rounded-md px-4 opacity-80" data-aos="fade-up" data-aos-delay="200">
+             <div class="flex items-center gap-4 md:gap-6 text-center md:text-left min-w-[180px]">
+               <div class="text-5xl font-semibold w-16 text-center shrink-0">10</div>
+               <div class="grow"> <div class="text-base font-semibold tracking-wider uppercase">May</div> <div class="text-base font-semibold tracking-wider text-gray-400">2025</div> </div>
+             </div>
+             <div class="flex-grow text-center md:text-left"> <div class="text-lg md:text-xl font-semibold tracking-wider">ROCK DE QUINTAL</div> <div class="text-sm text-gray-400 tracking-wider">Manaus - AM - 00:00 AM - </div> </div>
+             <a href="https://www.instagram.com/casadaestrelaproducoes/" target="_blank" rel="noopener noreferrer" class="bg-gray-600 text-white text-sm font-semibold uppercase py-3 px-6 rounded tracking-wider w-full md:w-auto shrink-0">Soon</a>
+           </div>
+           <div class="border-b border-gray-700 py-6 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 hover:bg-gray-900/30 transition-colors duration-300 rounded-md px-4 opacity-80" data-aos="fade-up" data-aos-delay="250">
+             <div class="flex items-center gap-4 md:gap-6 text-center md:text-left min-w-[180px]">
+               <div class="text-5xl font-semibold w-16 text-center shrink-0">??</div>
+               <div class="grow"> <div class="text-base font-semibold tracking-wider uppercase">June</div> <div class="text-base font-semibold tracking-wider text-gray-400">2025</div> </div>
+             </div>
+             <div class="flex-grow text-center md:text-left"> <div class="text-lg md:text-xl font-semibold tracking-wider">??????????</div> <div class="text-sm text-gray-400 tracking-wider">Manaus - AM - 00:00 AM</div> </div>
+             <button class="bg-gray-600 cursor-not-allowed text-white text-sm font-semibold uppercase py-3 px-6 rounded tracking-wider w-full md:w-auto shrink-0">Soon</button>
+           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-section" data-aos="fade-in">
+      ‘’Soviet At's music has such an enigmatic and captivating aura that it makes you want to be inside that universe, as if you were part of the sonic spell itself.‘’
+    </section>
+
+    <section id="album" class="py-20 md:py-32 bg-black text-center">
+        <div class="container mx-auto px-6">
+            <h3 class="text-5xl font-semibold mb-2 tracking-wider" data-aos="fade-up">KEYLOG</h3>
+            <p class="text-sm font-semibold text-gray-400 mb-12 tracking-wider" data-aos="fade-up" data-aos-delay="100">2025 - Album</p>
+            <div class="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20">
+                <div class="w-full max-w-md lg:max-w-lg" data-aos="zoom-in-right" data-aos-duration="1000">
+                    <img class="w-full h-auto object-cover rounded-lg shadow-xl transform hover:scale-105 transition-transform duration-500" src="img/untitled-1-10.png" alt="KEYLOG Album Art"/>
+                </div>
+                <div class="w-full max-w-md text-left lg:text-center" data-aos="fade-left" data-aos-duration="1000">
+                    <ol class="space-y-3 text-lg md:text-xl font-semibold tracking-wide">
+                        <li data-aos="fade-left" data-aos-delay="100">1. ??????????</li> <li data-aos="fade-left" data-aos-delay="150">2. ??????????</li> <li data-aos="fade-left" data-aos-delay="200">3. ??????????</li> <li data-aos="fade-left" data-aos-delay="250">4. ??????????</li> <li data-aos="fade-left" data-aos-delay="300">5. ??????????</li> <li data-aos="fade-left" data-aos-delay="350">6. ??????????.Feat</li> <li data-aos="fade-left" data-aos-delay="400">7. ??????????</li> <li data-aos="fade-left" data-aos-delay="450">8. ??????????</li> <li data-aos="fade-left" data-aos-delay="500">9. ??????????</li> <li data-aos="fade-left" data-aos-delay="550">10. ??????????</li> <li data-aos="fade-left" data-aos-delay="600">11. ??????????</li> <li data-aos="fade-left" data-aos-delay="650">12. Cigarrete</li> <li data-aos="fade-left" data-aos-delay="700">13. ??????????</li> <li data-aos="fade-left" data-aos-delay="750">14. ??????????</li> <li data-aos="fade-left" data-aos-delay="800">15. ??????????</li> <li data-aos="fade-left" data-aos-delay="850">16. Your body</li> <li class="pt-2 text-gray-400 italic" data-aos="fade-left" data-aos-delay="900">---- BONUS ----</li> <li data-aos="fade-left" data-aos-delay="950">17. ??????????.Feat</li> <li data-aos="fade-left" data-aos-delay="1000">18. ??????????</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="merch" class="py-20 md:py-32 bg-black">
+      <div class="container mx-auto px-6">
+        <h2 class="text-4xl md:text-5xl font-semibold text-center mb-16" data-aos="fade-up">Merchandise</h2>
+        <div class="swiper-container" id="merch-swiper" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <a href="https://sovietat.bandcamp.com/album/sadness-boys" target="_blank" rel="noopener noreferrer" class="block group h-full">
+                <div class="bg-[#0c0c0c] rounded-3xl overflow-hidden shadow-lg flex flex-col h-full card-content-wrapper">
+                  <div class="overflow-hidden"> <img src="img/amisa-11.png" alt="Sadness Boys Merch" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out"/> </div>
+                  <div class="p-6 flex-grow flex flex-col justify-between">
+                    <div> <h3 class="font-sora-semibold text-2xl mb-2 text-white">Sadness Boys</h3> <div class="text-xl mb-4"> <span class="text-white font-semibold">$8.00</span> <span class="text-gray-500 line-through ml-2">($10.00)</span> </div> </div>
+                    <span class="mt-4 block w-full text-center bg-soviet-purple group-hover:bg-opacity-80 text-white font-semibold py-3 px-6 rounded transition duration-300">Add to Cart</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+             <div class="swiper-slide">
+              <a href="#" target="_blank" rel="noopener noreferrer" class="block group h-full">
+                <div class="bg-[#0c0c0c] rounded-3xl overflow-hidden shadow-lg flex flex-col h-full card-content-wrapper">
+                  <div class="overflow-hidden"> <img src="img/noname.png" alt="No Name (Pre save) Merch" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out"/> </div>
+                  <div class="p-6 flex-grow flex flex-col justify-between">
+                    <div> <h3 class="font-sora-semibold text-2xl mb-2 text-white">(Pre save) No name</h3> <div class="text-xl mb-4"> <span class="text-white font-semibold">$15.00</span> </div> </div>
+                    <span class="mt-4 block w-full text-center bg-soviet-purple group-hover:bg-opacity-80 text-white font-semibold py-3 px-6 rounded transition duration-300">Pre-save</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+             <div class="swiper-slide">
+              <a href="https://www.instagram.com/gattopreto.art/" target="_blank" rel="noopener noreferrer" class="block group h-full">
+                <div class="bg-[#0c0c0c] rounded-3xl overflow-hidden shadow-lg flex flex-col h-full card-content-wrapper">
+                  <div class="overflow-hidden"> <img src="img/Merch.png" alt="T-shirt model Sadnesst by Gattopreto Art" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out"/> </div>
+                  <div class="p-6 flex-grow flex flex-col justify-between">
+                    <div> <h3 class="font-sora-semibold text-2xl mb-2 text-white">T-shirt model Sadnesst</h3> <div class="text-xl mb-4"> <span class="text-white font-semibold">R$95.00</span> </div> </div>
+                    <span class="mt-4 block w-full text-center bg-soviet-purple group-hover:bg-opacity-80 text-white font-semibold py-3 px-6 rounded transition duration-300">Buy t-shirt</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 md:py-32 bg-black">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-regular mb-12" data-aos="fade-right"> Soviet at. Bandcamp Shop. </h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6">
+               <div class="bg-gray-800 rounded-xl aspect-square hover:opacity-80 transition-opacity duration-300 hover:scale-105" data-aos="zoom-in" data-aos-delay="0"></div> <div class="bg-gray-800 rounded-xl aspect-square hover:opacity-80 transition-opacity duration-300 hover:scale-105" data-aos="zoom-in" data-aos-delay="50"></div> <div class="bg-gray-800 rounded-xl aspect-square hover:opacity-80 transition-opacity duration-300 hover:scale-105" data-aos="zoom-in" data-aos-delay="100"></div> <div class="bg-gray-800 rounded-xl aspect-square hover:opacity-80 transition-opacity duration-300 hover:scale-105" data-aos="zoom-in" data-aos-delay="150"></div> <div class="bg-gray-800 rounded-xl aspect-square hover:opacity-80 transition-opacity duration-300 hover:scale-105" data-aos="zoom-in" data-aos-delay="200"></div> <div class="bg-gray-800 rounded-xl aspect-square hover:opacity-80 transition-opacity duration-300 hover:scale-105" data-aos="zoom-in" data-aos-delay="250"></div> <div class="bg-gray-800 rounded-xl aspect-square hover:opacity-80 transition-opacity duration-300 hover:scale-105" data-aos="zoom-in" data-aos-delay="300"></div> <div class="bg-gray-800 rounded-xl aspect-square hover:opacity-80 transition-opacity duration-300 hover:scale-105" data-aos="zoom-in" data-aos-delay="350"></div> <div class="bg-gray-800 rounded-xl aspect-square hover:opacity-80 transition-opacity duration-300 hover:scale-105" data-aos="zoom-in" data-aos-delay="400"></div> <div class="bg-gray-800 rounded-xl aspect-square hover:opacity-80 transition-opacity duration-300 hover:scale-105" data-aos="zoom-in" data-aos-delay="450"></div> <div class="bg-gray-800 rounded-xl aspect-square hover:opacity-80 transition-opacity duration-300 hover:scale-105" data-aos="zoom-in" data-aos-delay="500"></div> <div class="bg-gray-800 rounded-xl aspect-square hover:opacity-80 transition-opacity duration-300 hover:scale-105" data-aos="zoom-in" data-aos-delay="550"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="quote-section" data-aos="fade-in">
+      ‘’Soviet At - Show Completo; Manaus, AM 6/29/24‘’
+    </section>
+
+    <section class="py-20 md:py-29 bg-black">
+        <div class="container mx-auto px-6" data-aos="zoom-in-up" data-aos-duration="1000">
+            <div class="max-w-5xl mx-auto rounded-2xl md:rounded-3xl overflow-hidden shadow-xl aspect-w-16 aspect-h-9">
+                <iframe src="https://www.youtube.com/embed/7kUDbiTaV8k?start=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section id="records" class="bg-black">
+       <div class="container mx-auto px-0"> <div class="flex flex-col md:flex-row items-stretch"> <div class="w-full md:w-1/2 bg-[#151515] p-8 md:p-16 lg:p-24 flex flex-col justify-center rounded-r-lg md:rounded-r-none md:rounded-tr-lg md:rounded-br-lg" data-aos="fade-right" data-aos-duration="1000"> <h2 class="text-4xl md:text-5xl font-semibold mb-6 leading-tight">Get to know our seal</h2> <p class="text-lg text-soviet-gray-medium mb-10 leading-relaxed">We are an independent music label dedicated to the underground scene, offering complete support to artists seeking professionalization. We combine digital marketing, distribution and home studios to boost talent and take your music to the next level.</p><div class="flex flex-col sm:flex-row items-center gap-6"> <a href="contact.html" class="w-full sm:w-auto text-center bg-[#1830c9] hover:bg-opacity-80 text-white font-semibold py-4 px-8 rounded-lg transition duration-300 text-lg tracking-wider">Get Started</a> <button class="w-full sm:w-auto flex items-center justify-center gap-3 text-white font-semibold text-lg tracking-wider group"> <span class="bg-[rgba(217,217,217,0.20)] group-hover:bg-[rgba(217,217,217,0.30)] p-1 rounded-full transition duration-300"> <span class="bg-[#eeeeee] group-hover:bg-white block w-10 h-10 rounded-full flex items-center justify-center transition duration-300 transform group-hover:scale-110"> <svg class="w-4 h-4 text-black" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.0175 8.06547L2.54998 0.191973C1.79998 -0.208027 1.11248 0.0169732 0.719978 0.766973C0.437478 1.31697 0.509978 1.88697 0.937478 2.26197L6.74998 7.31947C7.24998 7.75697 7.24998 8.51947 6.74998 8.95697L0.937478 14.0145C0.509978 14.3895 0.437478 14.9595 0.719978 15.5095C1.11248 16.2595 1.79998 16.4845 2.54998 16.0845L17.0175 8.21097C17.68 7.85347 17.68 7.42847 17.0175 8.06547Z" fill="currentColor"/></svg> </span> </span> Watch Video </button> </div></div><div class="w-full md:w-1/2" data-aos="fade-left" data-aos-duration="1000"> <div class="h-64 md:h-full bg-cover bg-center flex items-center justify-center text-gray-500" style="background-image: url('img/group-130.svg'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div></div></div></div>
+    </section>
+
+  </main>
+
+  <footer id="contact" class="bg-black pt-20 pb-10">
+    <div class="container mx-auto px-6">
+       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+         <div data-aos="fade-up"> <h3 class="text-3xl font-semibold mb-4 tracking-wide">Soviet Records</h3> <p class="text-soviet-gray-medium text-lg leading-relaxed mb-6">Helping independent dreams come true</p><div class="flex space-x-4"> <a href="https://www.facebook.com/people/Soviet-At/61559407811087/" target="_blank" rel="noopener noreferrer" class="social-icon"><img src="ico/facebook0.svg" alt="Facebook" class="w-9 h-9"></a> <a href="#" class="social-icon"><img src="ico/twitter0.svg" alt="Twitter" class="w-9 h-9"></a> <a href="https://www.instagram.com/soviet_at" target="_blank" rel="noopener noreferrer" class="social-icon"><img src="ico/instagram0.svg" alt="Instagram" class="w-9 h-9"></a> </div></div>
+         <div data-aos="fade-up" data-aos-delay="100"> <h4 class="text-2xl font-semibold mb-6 tracking-wide">About</h4> <ul class="space-y-3 text-lg text-soviet-gray-light"> <li><a href="#home" class="hover:text-white transition duration-300">Home</a></li> <li><a href="#contact" class="hover:text-white transition duration-300">Contact</a></li> <li><a href="#about" class="hover:text-white transition duration-300">About Us</a></li> <li><a href="#upcoming-dates" class="hover:text-white transition duration-300">Tour</a></li> </ul> </div>
+         <div data-aos="fade-up" data-aos-delay="200"> <h4 class="text-2xl font-semibold mb-6 tracking-wide">Information</h4> <ul class="space-y-3 text-lg text-soviet-gray-light"> <li><a href="#merch" class="hover:text-white transition duration-300">Merchandise</a></li> <li><a href="https://sovietat.bandcamp.com/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition duration-300">Bandcamp</a></li> <li><a href="contact.html" class="hover:text-white transition duration-300">Contact Me</a></li> <li><a href="#" class="hover:text-white transition duration-300">Privacy Policy</a></li> </ul> </div>
+         <div data-aos="fade-up" data-aos-delay="300"> <h4 class="text-2xl font-semibold mb-6 tracking-wide">Hire us</h4> <p class="text-soviet-gray-medium text-lg leading-relaxed mb-6">Want to have soviet at in your lineup, get in touch</p><a href="contact.html" class="inline-block bg-[#1830c9] hover:bg-opacity-80 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 text-lg tracking-wider">CONTACT US</a> </div>
+        </div>
+       <div class="border-t border-soviet-footer-border pt-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+         <p class="text-soviet-footer-link text-base md:text-lg mb-4 md:mb-0"> © Soviet At 2025 all rights reserved </p>
+         <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-soviet-footer-link text-base md:text-lg">
+             <span>Created and produced by Matheuskiev</span>
+             <a href="#" class="hover:text-white transition duration-300">Term & Services</a>
+         </div>
+       </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <script>
+    AOS.init({ duration: 800, once: true, offset: 50, delay: 50 });
+
+    const merchSwiper = new Swiper('#merch-swiper', {
+      loop: true, slidesPerView: 1, spaceBetween: 20, grabCursor: true, speed: 600,
+      breakpoints: { 640: { slidesPerView: 2, spaceBetween: 30 }, 1024: { slidesPerView: 3, spaceBetween: 40 } },
+      pagination: { el: '#merch-swiper .swiper-pagination', clickable: true },
+      navigation: { nextEl: '#merch-swiper .swiper-button-next', prevEl: '#merch-swiper .swiper-button-prev' },
+      a11y: { prevSlideMessage: 'Previous merchandise', nextSlideMessage: 'Next merchandise' },
+    });
+
+    const teamSwiper = new Swiper('#team-swiper', {
+      loop: true, slidesPerView: 1, spaceBetween: 20, grabCursor: true, speed: 600,
+      breakpoints: { 641: { slidesPerView: 2, spaceBetween: 20 }, 768: { slidesPerView: 3, spaceBetween: 30 }, 1024: { slidesPerView: 4, spaceBetween: 30 } },
+      pagination: { el: '#team-swiper .swiper-pagination', clickable: true },
+      navigation: { nextEl: '#team-swiper .swiper-button-next', prevEl: '#team-swiper .swiper-button-prev' },
+      a11y: { prevSlideMessage: 'Previous member', nextSlideMessage: 'Next member' },
+    });
+
+    const menuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuButton && mobileMenu) {
+        menuButton.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+        mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { mobileMenu.classList.add('hidden'); }); });
+    }
+  </script>
+
+</body>
+</html>

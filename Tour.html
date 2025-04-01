@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Tailwind CSS -->
+  <script src='https://cdn.tailwindcss.com/3.2.0'></script>
+  <!-- AOS Library (for scroll animations) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Font Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Sora:wght@600&display=swap" rel="stylesheet">
+
+  <title>Tour Dates</title> <!-- Specific Title -->
+
+  <style>
+    /* Basic Reset */
+    body {
+        font-family: 'Poppins', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #000000;
+        color: #ffffff;
+        overflow-x: hidden;
+    }
+
+    /* Consistent Gradient Style (can be reused) */
+    .section-gradient::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.9) 0%, /* Darker at bottom */
+            rgba(0, 0, 0, 0.7) 30%,
+            rgba(0, 0, 0, 0.2) 70%,
+            rgba(0, 0, 0, 0) 100% /* Fades out at top */
+        );
+        z-index: 1;
+    }
+    .section-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    footer a:hover, footer .social-icon:hover {
+        opacity: 0.8;
+        transition: opacity 0.2s ease-in-out;
+    }
+    footer .social-icon:hover {
+        transform: scale(1.1);
+    }
+     footer a:hover {
+         text-decoration: underline;
+     }
+
+     /* Styling for past dates */
+     .past-date-item {
+        opacity: 0.7;
+     }
+     .past-date-item button {
+        background-color: #4a4a4a; /* Darker gray */
+        cursor: default;
+     }
+     .past-date-item button:hover {
+        background-color: #4a4a4a; /* No hover effect */
+        opacity: 1; /* Override purple hover */
+     }
+
+
+  </style>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+            sora: ['Sora', 'sans-serif']
+          },
+          colors: {
+            'soviet-purple': '#5b00db',
+            'soviet-blue': '#0077ff',
+            'soviet-gray-light': '#d1d1db',
+            'soviet-gray-medium': '#737373',
+            'soviet-gray-dark': '#1e1d1d',
+            'soviet-footer-link': '#afafc0',
+            'soviet-footer-border': '#5e5e78',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-black text-white font-poppins">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-black bg-opacity-80 backdrop-blur-sm shadow-md py-4"> <!-- Removed AOS for simplicity on tour page header -->
+    <div class="container mx-auto px-6 flex justify-between items-center">
+      <a href="./index.html" class="flex items-center space-x-2"> <!-- Link back to main page -->
+        <img class="w-auto h-8 md:h-10" src="img/metalic-logo-mockup-10.png" alt="Soviet At Logo" />
+      </a>
+      <nav class="hidden lg:flex items-center space-x-6 text-sm tracking-[1.5px]">
+        <a href="./index.html#home" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">HOME</a>
+        <a href="./index.html#merch" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">MERCH</a>
+        <a href="./index.html#about" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">ABOUT</a>
+        <a href="./tour.html" class="text-soviet-purple font-semibold opacity-100">TOUR</a> <!-- Highlight Tour -->
+        <a href="./index.html#contact" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">CONTACT</a>
+        <a href="./sovietrecords/index.html" class="text-soviet-blue opacity-70 hover:opacity-100 transition-opacity duration-300">SOVIETRECORDS</a>
+      </nav>
+      <button class="lg:hidden text-white focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- Tour Hero Section -->
+    <section id="hero-tour" class="relative h-[400px] md:h-[550px] w-full flex items-end justify-center text-center overflow-hidden">
+        <!-- Use a relevant background image - Placeholder -->
+        <img
+            class="absolute inset-0 w-full h-full object-cover object-center z-0"
+            src="img/img0.svg"  alt="Live performance background"
+            />
+        <!-- Gradient Overlay -->
+        <div class="section-gradient"></div>
+
+        <!-- Content -->
+        <div class="container mx-auto px-6 section-content pb-16 md:pb-24" data-aos="fade-up">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight uppercase">
+                On Tour
+            </h1>
+            <p class="text-lg md:text-xl opacity-80 max-w-2xl mx-auto">
+                Catch Soviet At live. Find upcoming dates and get your tickets.
+            </p>
+        </div>
+    </section>
+
+    <!-- Upcoming Dates Section -->
+    <section id="upcoming-dates" class="py-20 md:py-24 bg-black">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-semibold text-center mb-12 md:mb-16 tracking-wider" data-aos="fade-up">
+          Upcoming Shows
+        </h2>
+
+        <div class="max-w-4xl mx-auto space-y-5">
+          <!-- Date Row 1 -->
+           <div class="border-b border-gray-700 py-6 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 hover:bg-gray-900/30 transition-colors duration-300 rounded-md px-4" data-aos="fade-up" data-aos-delay="100">
+             <div class="flex items-center gap-4 md:gap-6 text-center md:text-left min-w-[180px]"> <!-- Min width for date alignment -->
+               <div class="text-5xl font-semibold w-16 text-center shrink-0">12</div>
+               <div class="grow">
+                 <div class="text-base font-semibold tracking-wider uppercase">April</div>
+                 <div class="text-base font-semibold tracking-wider text-gray-400">2025</div>
+               </div>
+             </div>
+             <div class="flex-grow text-center md:text-left">
+                <div class="text-lg md:text-xl font-semibold tracking-wider">BAR DO CABELO</div>
+                <div class="text-sm text-gray-400 tracking-wider">Manaus - AM - 00:00 AM - R. Marquesa de Santos, 47 - Coroado</div>
+             </div>
+             <a href="#" target="_blank" rel="noopener noreferrer" class="bg-soviet-purple hover:bg-opacity-80 text-white text-sm font-semibold uppercase py-3 px-6 rounded transition duration-300 tracking-wider w-full md:w-auto shrink-0 text-center">
+               FREE Tickets
+             </a>
+           </div>
+<!-- DATE 1 -->
+<div class="border-b border-gray-700 py-6 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 hover:bg-gray-900/30 transition-colors duration-300 rounded-md px-4" data-aos="fade-up" data-aos-delay="150">
+  <div class="flex items-center gap-4 md:gap-6 text-center md:text-left min-w-[180px]">
+    <div class="text-5xl font-semibold w-16 text-center shrink-0">9</div>
+     <div class="grow">
+      <div class="text-base font-semibold tracking-wider uppercase">APRIL</div>
+      <div class="text-base font-semibold tracking-wider text-gray-400">2025</div>
+    </div>
+  </div>
+  <div class="flex-grow text-center md:text-left">
+     <div class="text-lg md:text-xl font-semibold tracking-wider">TERTULIA AMAZONICA</div>
+     <div class="text-sm text-gray-400 tracking-wider">Manaus - AM - 00:00</div>
+  </div>
+  <a href="https://www.youtube.com/@tertuliaamazonicaoficial8446" target="_blank" rel="noopener noreferrer" class="bg-soviet-purple hover:bg-opacity-80 text-white text-sm font-semibold uppercase py-3 px-6 rounded transition duration-300 tracking-wider w-full md:w-auto shrink-0 text-center">
+   LIVE PODCAST
+  </a>
+</div>
+          <!-- Date Row 2 -->
+           <div class="border-b border-gray-700 py-6 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 hover:bg-gray-900/30 transition-colors duration-300 rounded-md px-4" data-aos="fade-up" data-aos-delay="150">
+             <div class="flex items-center gap-4 md:gap-6 text-center md:text-left min-w-[180px]">
+               <div class="text-5xl font-semibold w-16 text-center shrink-0">19</div>
+                <div class="grow">
+                 <div class="text-base font-semibold tracking-wider uppercase">APRIL</div>
+                 <div class="text-base font-semibold tracking-wider text-gray-400">2025</div>
+               </div>
+             </div>
+             <div class="flex-grow text-center md:text-left">
+                <div class="text-lg md:text-xl font-semibold tracking-wider">GRINGOS BAR</div>
+                <div class="text-sm text-gray-400 tracking-wider">Manaus - AM - 00:00 AM - Av. Eduardo Ribeiro, 926</div>
+             </div>
+             <a href="#" target="_blank" rel="noopener noreferrer" class="bg-soviet-purple hover:bg-opacity-80 text-white text-sm font-semibold uppercase py-3 px-6 rounded transition duration-300 tracking-wider w-full md:w-auto shrink-0 text-center">
+              FREE Tickets
+             </a>
+           </div>
+                      <!-- Date Row 3 (Placeholder/TBA) -->
+           <div class="border-b border-gray-700 py-6 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 hover:bg-gray-900/30 transition-colors duration-300 rounded-md px-4 opacity-80" data-aos="fade-up" data-aos-delay="200">
+             <div class="flex items-center gap-4 md:gap-6 text-center md:text-left min-w-[180px]">
+               <div class="text-5xl font-semibold w-16 text-center shrink-0">10</div>
+               <div class="grow">
+                 <div class="text-base font-semibold tracking-wider uppercase">May</div>
+                 <div class="text-base font-semibold tracking-wider text-gray-400">2025</div>
+                </div>
+             </div>
+             <div class="flex-grow text-center md:text-left">
+              <div class="text-lg md:text-xl font-semibold tracking-wider">ROCK DE QUINTAL</div>
+              <div class="text-sm text-gray-400 tracking-wider">Manaus - AM - 00:00 AM - </div>
+             </div>
+             <button class="bg-gray-600 cursor-not-allowed text-white text-sm font-semibold uppercase py-3 px-6 rounded tracking-wider w-full md:w-auto shrink-0">
+                Soon
+             </button>
+           </div>
+
+           <!-- Date Row 4 (Placeholder/TBA) -->
+           <div class="border-b border-gray-700 py-6 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 hover:bg-gray-900/30 transition-colors duration-300 rounded-md px-4 opacity-80" data-aos="fade-up" data-aos-delay="250">
+             <div class="flex items-center gap-4 md:gap-6 text-center md:text-left min-w-[180px]">
+               <div class="text-5xl font-semibold w-16 text-center shrink-0">??</div>
+               <div class="grow">
+                 <div class="text-base font-semibold tracking-wider uppercase">June</div>
+                 <div class="text-base font-semibold tracking-wider text-gray-400">2025</div>
+                </div>
+             </div>
+             <div class="flex-grow text-center md:text-left">
+              <div class="text-lg md:text-xl font-semibold tracking-wider">??????????</div>
+              <div class="text-sm text-gray-400 tracking-wider">Manaus - AM - 00:00 AM</div>
+             </div>
+             <button class="bg-gray-600 cursor-not-allowed text-white text-sm font-semibold uppercase py-3 px-6 rounded tracking-wider w-full md:w-auto shrink-0">
+                Soon
+             </button>
+           </div>
+           <!-- Add more upcoming dates following this pattern -->
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Past Dates Section (Optional) -->
+    <section id="past-dates" class="pt-10 pb-20 md:pb-24 bg-black">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-semibold text-center mb-12 md:mb-16 tracking-wider" data-aos="fade-up">
+          Past Shows
+        </h2>
+
+        <div class="max-w-4xl mx-auto space-y-5">
+          <!-- Past Date Row 1 -->
+           <div class="past-date-item border-b border-gray-800 py-5 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 rounded-md px-4" data-aos="fade-up" data-aos-delay="100">
+             <div class="flex items-center gap-4 md:gap-6 text-center md:text-left min-w-[180px]">
+               <div class="text-4xl font-semibold w-16 text-center shrink-0">20</div> <!-- Slightly smaller date for past -->
+               <div class="grow">
+                 <div class="text-sm font-semibold tracking-wider uppercase">SEP</div>
+                 <div class="text-sm font-semibold tracking-wider text-gray-500">2025</div>
+               </div>
+             </div>
+             <div class="flex-grow text-center md:text-left">
+              <div class="text-lg md:text-xl font-semibold tracking-wider">??????????</div>
+              <div class="text-sm text-gray-400 tracking-wider">Manaus - AM - 00:00 AM</div>
+             </div>
+             <button disabled class="text-white text-xs font-semibold uppercase py-2 px-4 rounded tracking-wider w-full md:w-auto shrink-0">
+               Past Event
+             </button>
+           </div>
+
+            <!-- Past Date Row 2 -->
+           <div class="past-date-item border-b border-gray-800 py-5 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 rounded-md px-4" data-aos="fade-up" data-aos-delay="150">
+             <div class="flex items-center gap-4 md:gap-6 text-center md:text-left min-w-[180px]">
+               <div class="text-4xl font-semibold w-16 text-center shrink-0">05</div>
+               <div class="grow">
+                <div class="text-lg md:text-xl font-semibold tracking-wider">DEC</div>
+                <div class="text-sm text-gray-400 tracking-wider">Manaus - AM - 00:00 AM</div>
+               </div>
+             </div>
+             <div class="flex-grow text-center md:text-left">
+              <div class="text-lg md:text-xl font-semibold tracking-wider">??????????</div>
+              <div class="text-sm text-gray-400 tracking-wider">Manaus - AM - 00:00 AM</div>
+             </div>
+             <button disabled class="text-white text-xs font-semibold uppercase py-2 px-4 rounded tracking-wider w-full md:w-auto shrink-0">
+               Past Event
+             </button>
+           </div>
+            <!-- Add more past dates if needed -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+<footer id="contact" class="bg-black pt-20 pb-10">
+    <div class="container mx-auto px-6">
+       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16"> <div data-aos="fade-up"> <h3 class="text-3xl font-semibold mb-4 tracking-wide">Soviet Records</h3> <p class="text-soviet-gray-medium text-lg leading-relaxed mb-6">Helping independent dreams come true</p><div class="flex space-x-4"> <a href="https://www.facebook.com/people/Soviet-At/61559407811087/" target="_blank" rel="noopener noreferrer" class="social-icon"><img src="ico/facebook0.svg" alt="Facebook" class="w-9 h-9"></a> <a href="#" class="social-icon"><img src="ico/twitter0.svg" alt="Twitter" class="w-9 h-9"></a> <a href="https://www.instagram.com/soviet_at" target="_blank" rel="noopener noreferrer" class="social-icon"><img src="ico/instagram0.svg" alt="Instagram" class="w-9 h-9"></a> </div></div><div data-aos="fade-up" data-aos-delay="100"> <h4 class="text-2xl font-semibold mb-6 tracking-wide">About</h4> <ul class="space-y-3 text-lg text-soviet-gray-light"> <li><a href="#home" class="hover:text-white transition duration-300">Home</a></li> <li><a href="#contact" class="hover:text-white transition duration-300">Contact</a></li> <li><a href="#about" class="hover:text-white transition duration-300">About Us</a></li> <li><a href="#tour" class="hover:text-white transition duration-300">Tour</a></li> </ul> </div><div data-aos="fade-up" data-aos-delay="200"> <h4 class="text-2xl font-semibold mb-6 tracking-wide">Information</h4> <ul class="space-y-3 text-lg text-soviet-gray-light"> <li><a href="#merch" class="hover:text-white transition duration-300">Merchandise</a></li> <li><a href="https://sovietat.bandcamp.com/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition duration-300">Bandcamp</a></li> <li><a href="#contact" class="hover:text-white transition duration-300">Contact Me</a></li> <li><a href="#" class="hover:text-white transition duration-300">Privacy Policy</a></li> </ul> </div><div data-aos="fade-up" data-aos-delay="300"> <h4 class="text-2xl font-semibold mb-6 tracking-wide">Hire us</h4> <p class="text-soviet-gray-medium text-lg leading-relaxed mb-6">Want to have soviet at in your lineup, get in touch</p><a href="contact.html" class="inline-block bg-[#1830c9] hover:bg-opacity-80 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 text-lg tracking-wider">CONTACT US</a> </div></div>
+       <div class="border-t border-soviet-footer-border pt-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+         <p class="text-soviet-footer-link text-base md:text-lg mb-4 md:mb-0">
+             © Soviet At 2025 all rights reserved
+         </p>
+         <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-soviet-footer-link text-base md:text-lg">
+             <span>Created and produced by Matheuskiev</span>
+             <a href="#" class="hover:text-white transition duration-300">Term & Services</a>
+         </div>
+       </div>
+    </div>
+  </footer>
+
+  <!-- AOS Script -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Initialize AOS
+    AOS.init({
+        duration: 800,
+        once: true,
+    });
+  </script>
+
+</body>
+</html>
