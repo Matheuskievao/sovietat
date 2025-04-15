@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P9D72ZV2VY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-P9D72ZV2VY');
+</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src='https://cdn.tailwindcss.com/3.2.0'></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Sora:wght@600&display=swap" rel="stylesheet">
+
+  <!-- Changed Title for the new page -->
+  <title>Media - Soviet At</title>
+
+  <style>
+    /* Styles are copied directly from index.html for consistency */
+    body {
+        font-family: 'Poppins', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #000000;
+        color: #ffffff;
+        overflow-x: hidden;
+    }
+    .font-sora-semibold {
+        font-family: 'Sora', sans-serif;
+        font-weight: 600;
+    }
+    /* Removed hero-gradient styles as the hero section isn't here */
+    .quote-section {
+        text-align: center; padding: 4rem 1rem; max-width: 1100px; margin: 3rem auto;
+        font-size: 1.5rem; line-height: 2.5rem; font-weight: 600; letter-spacing: 1px;
+        border-top: 1px solid #333; border-bottom: 1px solid #333;
+    }
+    footer a:not(.social-icon):hover { text-decoration: underline; opacity: 0.8; transition: opacity 0.2s ease-in-out; }
+    footer .social-icon:hover { opacity: 0.8; transform: scale(1.1); transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out; }
+    /* Swiper styles kept in case needed later, but specific instances removed from JS */
+    .swiper-container { width: 100%; position: relative; padding-bottom: 60px; overflow: hidden; }
+    .swiper-wrapper { display: flex; }
+    .swiper-slide { height: auto; flex-shrink: 0; width: auto; display: flex; flex-direction: column; }
+    .swiper-slide > a, .swiper-slide > div:first-child { display: flex; flex-direction: column; height: 100%; width: 100%; }
+    .swiper-slide .card-content-wrapper { flex-grow: 1; display: flex; flex-direction: column; }
+    .swiper-button-next, .swiper-button-prev {
+        color: #ffffff; background-color: rgba(0, 0, 0, 0.3); border-radius: 50%;
+        width: 44px; height: 44px; transition: background-color 0.3s ease;
+        position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
+    }
+    .swiper-button-next:hover, .swiper-button-prev:hover { background-color: rgba(0, 0, 0, 0.6); }
+    .swiper-button-next::after, .swiper-button-prev::after { font-size: 18px; font-weight: bold; }
+    .swiper-button-prev { left: 15px; }
+    .swiper-button-next { right: 15px; }
+    .swiper-pagination { position: absolute; bottom: 15px; left: 0; width: 100%; text-align: center; z-index: 10; pointer-events: auto; }
+    .swiper-pagination-bullet { background-color: #a0a0a0; opacity: 1; transition: background-color 0.3s ease; width: 10px; height: 10px; margin: 0 5px !important; display: inline-block; }
+    .swiper-pagination-bullet-active { background-color: var(--soviet-purple, #5b00db); }
+    .swiper-pagination-clickable .swiper-pagination-bullet { cursor: pointer; }
+    .aspect-w-16 { position: relative; padding-bottom: 56.25%; /* 16:9 */ }
+    .aspect-h-9 { height: 0; }
+    .aspect-w-16 > iframe, .aspect-w-16 > img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; /* Added for images */ }
+    .aspect-square { position: relative; padding-bottom: 100%; } /* Added for square images */
+    .aspect-square > img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+
+    @keyframes pulse-logo { 0%, 100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.03); opacity: 1; } }
+    .animate-logo-pulse { animation: pulse-logo 4s ease-in-out infinite; }
+    .header-spotify-player { display: inline-flex; align-items: center; background-color: rgba(40, 40, 40, 0.5); padding: 5px 10px; border-radius: 50px; border: 1px solid rgba(80, 80, 80, 0.5); gap: 6px; transition: background-color 0.3s ease; text-decoration: none; vertical-align: middle; }
+    .header-spotify-player:hover { background-color: rgba(60, 60, 60, 0.7); }
+    .icon-spotify { width: 16px; height: 16px; flex-shrink: 0; }
+    .icon-spotify path { fill: #1DB954; }
+    .equalizer-animation { display: flex; align-items: flex-end; height: 12px; gap: 2px; }
+    .equalizer-animation span { display: block; width: 2px; background-color: #1DB954; animation: equalize 1.2s infinite ease-in-out; border-radius: 1px; }
+    .equalizer-animation span:nth-child(1) { height: 60%; animation-delay: -0.9s; }
+    .equalizer-animation span:nth-child(2) { height: 100%; animation-delay: -0.6s; }
+    .equalizer-animation span:nth-child(3) { height: 40%; animation-delay: -0.3s; }
+    @keyframes equalize { 0%, 100% { transform: scaleY(0.3); opacity: 0.5; } 50% { transform: scaleY(1); opacity: 1; } }
+    :root {
+        --soviet-purple: #5b00db; --soviet-blue: #0077ff; --soviet-gray-light: #d1d1db;
+        --soviet-gray-medium: #737373; --soviet-gray-dark: #1e1d1d; --soviet-footer-link: #afafc0;
+        --soviet-footer-border: #5e5e78; --spotify-green: #1DB954;
+    }
+  </style>
+
+  <script>
+    // Tailwind config copied directly from index.html
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { poppins: ['Poppins', 'sans-serif'], sora: ['Sora', 'sans-serif'] },
+          colors: {
+            'soviet-purple': 'var(--soviet-purple)', 'soviet-blue': 'var(--soviet-blue)',
+            'soviet-gray-light': 'var(--soviet-gray-light)', 'soviet-gray-medium': 'var(--soviet-gray-medium)',
+            'soviet-gray-dark': 'var(--soviet-gray-dark)', 'soviet-footer-link': 'var(--soviet-footer-link)',
+            'soviet-footer-border': 'var(--soviet-footer-border)',
+          },
+          aspectRatio: { // Ensure aspect ratio utilities are available if needed
+            '16/9': '16 / 9',
+            '4/3': '4 / 3',
+            '1/1': '1 / 1',
+          },
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-black text-white font-poppins">
+
+    <!-- Header copied from index.html, added MEDIA link -->
+    <header class="sticky top-0 z-50 bg-black bg-opacity-80 backdrop-blur-sm shadow-md py-4">
+      <div class="container mx-auto px-6 flex justify-between items-center">
+        <a href="./index.html" class="flex items-center space-x-2 flex-shrink-0">
+          <img class="w-auto h-8 md:h-10 animate-logo-pulse" src="img/metalic-logo-mockup-10.png" alt="Soviet At Logo" />
+        </a>
+        <div class="hidden lg:flex items-center space-x-6">
+            <nav class="flex items-center space-x-6 text-sm tracking-[1.5px]">
+              <a href="./index.html#home" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">HOME</a>
+              <a href="./index.html#merch" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">MERCH</a>
+              <a href="./index.html#about" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">ABOUT</a>
+              <a href="./tour.html" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">TOUR</a>
+              <a href="./media.html" class="text-white opacity-100 font-semibold">MEDIA</a> <!-- Added Media Link -->
+              <a href="./contact.html" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">CONTACT</a>
+              <a href="https://sovietat.com.br/sovietrecords" class="text-soviet-blue opacity-70 hover:opacity-100 transition-opacity duration-300">SOVIETRECORDS</a>
+            </nav>
+            <a href="https://open.spotify.com/track/3QNQQPYQjESv0AC19TL0aw" target="_blank" rel="noopener noreferrer" class="header-spotify-player" title="Listen on Spotify">
+                  <svg class="icon-spotify" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Spotify</title><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm6.214 17.51c-.204.32-.58.433-.9.232-2.637-1.623-5.902-1.99-10.165-1.087-.39.09-.76-.126-.848-.514-.09-.39.126-.76.514-.848C11.47 14.39 15.11 14.794 18.08 16.64c.32.2.434.58.233.9zm.877-2.364c-.247.386-.7.517-1.086.27-3.04-1.86-7.015-2.41-11.61-.126-.454.09-.91-.16-.998-.616-.09-.455.16-.91.615-.998 5.137-2.496 9.596-1.84 12.99 1.454.386.246.516.7.27 1.086zm.11-2.58c-.31.473-.876.617-1.35.307C14.28 10.69 9.75 10.376 5.756 11.54c-.51.153-1.043-.12-1.195-.633-.153-.51.12-1.044.633-1.196 4.573-1.366 9.724-1.016 13.96 1.687.473.31.616.877.306 1.35z"/></svg>
+                  <div class="equalizer-animation">
+                      <span></span><span></span><span></span>
+                  </div>
+            </a>
+         </div>
+         <div class="lg:hidden">
+            <button id="mobile-menu-button" class="text-white focus:outline-none">
+               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+         </div>
+      </div>
+       <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-black bg-opacity-90 backdrop-blur-sm py-4">
+           <nav class="flex flex-col items-center space-y-4 text-sm tracking-[1.5px]">
+              <a href="./index.html#home" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">HOME</a>
+              <a href="./index.html#merch" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">MERCH</a>
+              <a href="./index.html#about" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">ABOUT</a>
+              <a href="./tour.html" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">TOUR</a>
+               <a href="./media.html" class="text-white opacity-100 font-semibold">MEDIA</a> <!-- Added Media Link -->
+              <a href="./contact.html" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">CONTACT</a>
+              <a href="https://sovietat.com.br/sovietrecords" class="text-soviet-blue opacity-70 hover:opacity-100 transition-opacity duration-300">SOVIETRECORDS</a>
+            </nav>
+       </div>
+    </header>
+
+  <main class="pt-16 pb-16"> <!-- Added padding top/bottom to avoid overlap with header/footer -->
+
+    <!-- Page Title Section -->
+    <section class="py-16 md:py-24 bg-black text-center">
+        <div class="container mx-auto px-6">
+            <h1 class="text-4xl md:text-5xl font-semibold mb-4 tracking-wider" data-aos="fade-up">
+                Media Gallery
+            </h1>
+            <p class="text-lg text-soviet-gray-medium max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                Explore photos and videos from Soviet At.
+            </p>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section id="photos" class="py-16 md:py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-semibold text-center mb-12 md:mb-16 tracking-wider" data-aos="fade-up">
+                Photos
+            </h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                <!-- Replace image src attributes with your actual photo paths -->
+                <div class="aspect-square overflow-hidden rounded-lg shadow-lg group" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="img/group-101.svg" alt="Photo Description 1" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"/>
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg shadow-lg group" data-aos="zoom-in" data-aos-delay="150">
+                    <img src="img/group-100.svg" alt="Photo Description 2" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"/>
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg shadow-lg group" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="img/group-102.svg" alt="Photo Description 3" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"/>
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg shadow-lg group" data-aos="zoom-in" data-aos-delay="250">
+                    <img src="img/group-103.svg" alt="Photo Description 4" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"/>
+                </div>
+                 <div class="aspect-square overflow-hidden rounded-lg shadow-lg group" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="img/kernel.jpg" alt="Photo Description 5" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"/>
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg shadow-lg group" data-aos="zoom-in" data-aos-delay="350">
+                    <img src="https://via.placeholder.com/500x500/111111/ffffff?text=Photo+6" alt="Photo Description 6" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"/>
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg shadow-lg group" data-aos="zoom-in" data-aos-delay="400">
+                    <img src="https://via.placeholder.com/500x500/222222/ffffff?text=Photo+7" alt="Photo Description 7" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"/>
+                </div>
+                <div class="aspect-square overflow-hidden rounded-lg shadow-lg group" data-aos="zoom-in" data-aos-delay="450">
+                    <img src="https://via.placeholder.com/500x500/333333/ffffff?text=Photo+8" alt="Photo Description 8" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"/>
+                </div>
+                <!-- Add more images as needed -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Gallery Section -->
+    <section id="videos" class="py-16 md:py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-semibold text-center mb-12 md:mb-16 tracking-wider" data-aos="fade-up">
+                Videos
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
+                <!-- Video 1 -->
+                <div class="rounded-lg md:rounded-xl overflow-hidden shadow-xl" data-aos="fade-up" data-aos-delay="100">
+                    <div class="aspect-w-16 aspect-h-9">
+                        <!-- Replace iframe src with your video embed URL -->
+                        <iframe src="https://www.youtube.com/embed/7kUDbiTaV8k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                     <p class="text-center text-soviet-gray-medium mt-3 text-sm">Soviet At - Show Completo; Manaus, AM 6/29/24</p>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="rounded-lg md:rounded-xl overflow-hidden shadow-xl" data-aos="fade-up" data-aos-delay="200">
+                    <div class="aspect-w-16 aspect-h-9">
+                        <!-- Replace iframe src with your video embed URL -->
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Placeholder Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <p class="text-center text-soviet-gray-medium mt-3 text-sm">Placeholder Video Title 2</p>
+                </div>
+
+                 <!-- Add more videos as needed -->
+                 <div class="rounded-lg md:rounded-xl overflow-hidden shadow-xl" data-aos="fade-up" data-aos-delay="300">
+                    <div class="aspect-w-16 aspect-h-9">
+                        <!-- Replace iframe src with your video embed URL -->
+                        <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" title="Placeholder Video 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                     <p class="text-center text-soviet-gray-medium mt-3 text-sm">Placeholder Video Title 3</p>
+                </div>
+                 <div class="rounded-lg md:rounded-xl overflow-hidden shadow-xl" data-aos="fade-up" data-aos-delay="400">
+                    <div class="aspect-w-16 aspect-h-9">
+                        <!-- Replace iframe src with your video embed URL -->
+                        <iframe src="https://www.youtube.com/embed/VIDEO_ID_4" title="Placeholder Video 4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                     <p class="text-center text-soviet-gray-medium mt-3 text-sm">Placeholder Video Title 4</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+  </main>
+
+  <!-- Footer copied directly from index.html -->
+  <footer id="contact-footer" class="bg-black pt-20 pb-10"> <!-- Added unique ID to avoid conflict if #contact exists elsewhere -->
+    <div class="container mx-auto px-6">
+       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+         <div data-aos="fade-up"> <h3 class="text-3xl font-semibold mb-4 tracking-wide">Soviet Records</h3> <p class="text-soviet-gray-medium text-lg leading-relaxed mb-6">Helping independent dreams come true</p><div class="flex space-x-4"> <a href="https://www.facebook.com/people/Soviet-At/61559407811087/" target="_blank" rel="noopener noreferrer" class="social-icon"><img src="ico/facebook0.svg" alt="Facebook" class="w-9 h-9"></a> <a href="#" class="social-icon"><img src="ico/twitter0.svg" alt="Twitter" class="w-9 h-9"></a> <a href="https://www.instagram.com/soviet_at" target="_blank" rel="noopener noreferrer" class="social-icon"><img src="ico/instagram0.svg" alt="Instagram" class="w-9 h-9"></a> </div></div>
+         <div data-aos="fade-up" data-aos-delay="100"> <h4 class="text-2xl font-semibold mb-6 tracking-wide">About</h4> <ul class="space-y-3 text-lg text-soviet-gray-light"> <li><a href="./index.html#home" class="hover:text-white transition duration-300">Home</a></li> <li><a href="./contact.html" class="hover:text-white transition duration-300">Contact</a></li> <li><a href="./index.html#about" class="hover:text-white transition duration-300">About Us</a></li> <li><a href="./tour.html" class="hover:text-white transition duration-300">Tour</a></li> </ul> </div>
+         <div data-aos="fade-up" data-aos-delay="200"> <h4 class="text-2xl font-semibold mb-6 tracking-wide">Information</h4> <ul class="space-y-3 text-lg text-soviet-gray-light"> <li><a href="./index.html#merch" class="hover:text-white transition duration-300">Merchandise</a></li> <li><a href="https://sovietat.bandcamp.com/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition duration-300">Bandcamp</a></li> <li><a href="./media.html" class="hover:text-white transition duration-300">Media</a></li> <li><a href="#" class="hover:text-white transition duration-300">Privacy Policy</a></li> </ul> </div>
+         <div data-aos="fade-up" data-aos-delay="300"> <h4 class="text-2xl font-semibold mb-6 tracking-wide">Hire us</h4> <p class="text-soviet-gray-medium text-lg leading-relaxed mb-6">Want to have soviet at in your lineup, get in touch</p><a href="./contact.html" class="inline-block bg-[#1830c9] hover:bg-opacity-80 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 text-lg tracking-wider">CONTACT US</a> </div>
+        </div>
+       <div class="border-t border-soviet-footer-border pt-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+         <p class="text-soviet-footer-link text-base md:text-lg mb-4 md:mb-0"> © Soviet At 2025 all rights reserved </p>
+         <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-soviet-footer-link text-base md:text-lg">
+             <span>Created and produced by Matheuskiev</span>
+             <a href="#" class="hover:text-white transition duration-300">Term & Services</a>
+         </div>
+       </div>
+    </div>
+  </footer>
+
+  <!-- Scripts copied from index.html, removed specific Swiper initializations -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <script>
+    // Initialize AOS
+    AOS.init({ duration: 800, once: true, offset: 50, delay: 50 });
+
+    // Mobile Menu Logic (copied from index.html)
+    const menuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuButton && mobileMenu) {
+        menuButton.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+        // Close menu when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+             link.addEventListener('click', () => { mobileMenu.classList.add('hidden'); });
+        });
+        // Optional: Close menu if clicking outside of it (more complex setup)
+    }
+
+    // Swiper initializations for merch and team sliders are removed as they are not on this page.
+  </script>
+
+</body>
+</html>
