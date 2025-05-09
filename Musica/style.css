@@ -1,0 +1,9 @@
+#soundcloud-player-container {
+    position: absolute;
+    width: 1px; 
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+    left: -9999px; 
+    top: -9999px;
+}
