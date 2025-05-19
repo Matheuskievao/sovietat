@@ -153,6 +153,9 @@
         border-radius: 0.375rem; /* rounded-md */
         padding-left: 0.75rem; padding-right: 0.75rem; /* px-3 */
     }
+    .date-item:last-child {
+        border-bottom: none; /* Remove border for the last item in the list */
+    }
     .date-item:hover {
         background-color: rgba(17, 24, 39, 0.3); /* Tailwind gray-900/30 */
     }
@@ -161,6 +164,7 @@
         align-items: center;
         gap: 0.75rem; /* gap-3 */
         text-align: center;
+        flex-shrink: 0; /* Prevent shrinking */
     }
     .date-info .day {
         font-size: 2.25rem; /* text-4xl */
@@ -172,6 +176,7 @@
     }
     .date-info .month-year {
         flex-grow: 1;
+        text-align: left; /* Default mobile align */
     }
     .date-info .month-year .month {
         font-size: 0.875rem; /* text-sm */
@@ -190,7 +195,7 @@
     .event-details {
         flex-grow: 1;
         text-align: center;
-        width: 100%;
+        width: 100%; /* Full width on mobile */
     }
     .event-details .event-name {
         font-size: 1rem; /* text-base */
@@ -213,12 +218,19 @@
         border-radius: 0.375rem;
         transition: background-color 0.3s ease;
         letter-spacing: 0.05em;
-        width: 100%;
+        width: 100%; /* Full width on mobile */
         flex-shrink: 0;
         text-align: center;
         text-decoration: none;
-        margin-top: 0.5rem;
+        margin-top: 0.5rem; /* Space from details on mobile */
     }
+    .event-button.bg-gray-500 {
+      background-color: #6b7280; /* Tailwind gray-500 */
+    }
+    .event-button.bg-gray-500:hover {
+        background-color: #4b5563; /* Tailwind gray-600 */
+    }
+
 
     @media (min-width: 768px) { /* md breakpoint */
         .date-item {
@@ -226,12 +238,22 @@
             gap: 1.5rem; /* md:gap-6 */
             padding-top: 1.5rem; padding-bottom: 1.5rem; /* md:py-6 */
             padding-left: 1rem; padding-right: 1rem; /* md:px-4 */
+            align-items: flex-start; /* Align items to the top */
+        }
+         .date-item:last-child {
+            border-bottom: 1px solid var(--soviet-footer-border, #5e5e78); /* Restore border for last item in month */
+         }
+        .month-section .date-item:last-child {
+             border-bottom: none; /* Remove border for the last item in the MONTH section */
         }
         .date-info {
             gap: 1.5rem; /* md:gap-6 */
             text-align: left;
-            min-width: 180px;
+            min-width: 180px; /* Reserve space */
         }
+         .date-info .month-year {
+            text-align: left; /* Align to left on desktop */
+         }
         .date-info .day {
             font-size: 3rem; /* md:text-5xl */
         }
@@ -240,6 +262,8 @@
         }
         .event-details {
             text-align: left;
+            width: auto; /* Allow details to take necessary width */
+            flex-grow: 1; /* Allow details to grow */
         }
         .event-details .event-name {
             font-size: 1.125rem; /* md:text-xl */
@@ -251,7 +275,8 @@
             width: auto; /* md:w-auto */
             font-size: 0.875rem; /* md:text-sm */
             padding: 0.75rem 1.5rem; /* md:py-3 md:px-6 */
-            margin-top: 0;
+            margin-top: 0; /* Remove top margin on desktop */
+            margin-left: 1rem; /* Add left margin to separate from details */
         }
     }
   </style>
@@ -289,7 +314,7 @@
               <a href="./index.html#about" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">ABOUT</a>
               <a href="#upcoming-dates" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">TOUR</a>
               <a href="./contact.html" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">CONTACT</a>
-              <a href="https://sovietat.com.br/sovietrecords" class="text-soviet-blue opacity-70 hover:opacity-100 transition-opacity duration-300">SOVIETRECORDS</a>
+              <a href="https://sovietat.com.br/sovietrecords" target="_blank" rel="noopener noreferrer" class="text-soviet-blue opacity-70 hover:opacity-100 transition-opacity duration-300">SOVIETRECORDS</a>
             </nav>
             <a href="https://open.spotify.com/track/3QNQQPYQjESv0AC19TL0aw" target="_blank" rel="noopener noreferrer" class="header-spotify-player" title="Listen on Spotify">
                   <svg class="icon-spotify" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Spotify</title><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm6.214 17.51c-.204.32-.58.433-.9.232-2.637-1.623-5.902-1.99-10.165-1.087-.39.09-.76-.126-.848-.514-.09-.39.126-.76.514-.848C11.47 14.39 15.11 14.794 18.08 16.64c.32.2.434.58.233.9zm.877-2.364c-.247.386-.7.517-1.086.27-3.04-1.86-7.015-2.41-11.61-.126-.454.09-.91-.16-.998-.616-.09-.455.16-.91.615-.998 5.137-2.496 9.596-1.84 12.99 1.454.386.246.516.7.27 1.086zm.11-2.58c-.31.473-.876.617-1.35.307C14.28 10.69 9.75 10.376 5.756 11.54c-.51.153-1.043-.12-1.195-.633-.153-.51.12-1.044.633-1.196 4.573-1.366 9.724-1.016 13.96 1.687.473.31.616.877.306 1.35z"/></svg>
@@ -311,7 +336,7 @@
               <a href="./index.html#about" class="text-white opacity-80 hover:opacity-100 transition-opacity duration-300 py-1">ABOUT</a>
               <a href="./index.html#upcoming-dates" class="text-white opacity-80 hover:opacity-100 transition-opacity duration-300 py-1">TOUR</a>
               <a href="./contact.html" class="text-white opacity-80 hover:opacity-100 transition-opacity duration-300 py-1">CONTACT</a>
-              <a href="https://sovietat.com.br/sovietrecords" class="text-soviet-blue opacity-80 hover:opacity-100 transition-opacity duration-300 py-1">SOVIETRECORDS</a>
+              <a href="https://sovietat.com.br/sovietrecords" target="_blank" rel="noopener noreferrer" class="text-soviet-blue opacity-80 hover:opacity-100 transition-opacity duration-300 py-1">SOVIETRECORDS</a>
               <a href="https://open.spotify.com/track/3QNQQPYQjESv0AC19TL0aw" target="_blank" rel="noopener noreferrer" class="header-spotify-player mt-3" title="Listen on Spotify">
                 <svg class="icon-spotify" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Spotify</title><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm6.214 17.51c-.204.32-.58.433-.9.232-2.637-1.623-5.902-1.99-10.165-1.087-.39.09-.76-.126-.848-.514-.09-.39.126-.76.514-.848C11.47 14.39 15.11 14.794 18.08 16.64c.32.2.434.58.233.9zm.877-2.364c-.247.386-.7.517-1.086.27-3.04-1.86-7.015-2.41-11.61-.126-.454.09-.91-.16-.998-.616-.09-.455.16-.91.615-.998 5.137-2.496 9.596-1.84 12.99 1.454.386.246.516.7.27 1.086zm.11-2.58c-.31.473-.876.617-1.35.307C14.28 10.69 9.75 10.376 5.756 11.54c-.51.153-1.043-.12-1.195-.633-.153-.51.12-1.044.633-1.196 4.573-1.366 9.724-1.016 13.96 1.687.473.31.616.877.306 1.35z"/></svg>
                 <div class="equalizer-animation">
@@ -331,7 +356,7 @@
            <div class="max-w-md md:max-w-xl text-white">
                 <img class="w-36 sm:w-48 md:w-64 h-auto mb-6 md:mb-8" src="img/metalic-logo-mockup-20.png" alt="Soviet At Logo Large" data-aos="zoom-in" data-aos-delay="100"/>
                 <h1 class="text-3xl sm:text-4xl md:text-6xl font-semibold mb-4 leading-tight" data-aos="fade-right" data-aos-delay="200">
-                  Amazon's best post punk 
+                  Amazon's best post punk
                 </h1>
                 <p class="text-base sm:text-lg md:text-xl opacity-80 mb-8" data-aos="fade-right" data-aos-delay="300">
                     Dive into the world of Soviet At. Explore our music, tour dates, and latest releases.
@@ -433,94 +458,41 @@
     <section id="upcoming-dates" class="py-16 md:py-24 bg-black">
       <div class="container mx-auto px-4 sm:px-6">
         <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold text-center mb-8 md:mb-12 tracking-wider" data-aos="fade-up">
-          Agenda shows 2025
+          Agenda Shows 2025
         </h2>
-        
-        <!-- MÊS DE ABRIL -->
-        <div class="month-section mb-10 md:mb-16">
-            <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-center mb-6 md:mb-10 tracking-wider text-soviet-purple" data-aos="fade-up">
-              Month of April
-            </h3>
-            <div class="max-w-4xl mx-auto space-y-4 md:space-y-5">
-              <div class="date-item" data-aos="fade-up" data-aos-delay="150">
-                <div class="date-info">
-                  <div class="day">9</div>
-                  <div class="month-year"><span class="month">APRIL</span><span class="year">2025</span></div>
-                </div>
-                <div class="event-details">
-                  <div class="event-name">TERTULIA AMAZONICA</div>
-                  <div class="event-location">Manaus - AM - 00:00</div>
-                </div>
-                <a href="https://www.youtube.com/@tertuliaamazonicaoficial8446" target="_blank" rel="noopener noreferrer" class="event-button bg-soviet-purple hover:bg-opacity-80">LIVE PODCAST</a>
-              </div> 
-              <div class="date-item" data-aos="fade-up" data-aos-delay="100">
-                 <div class="date-info">
-                   <div class="day">12</div>
-                   <div class="month-year"><span class="month">APRIL</span><span class="year">2025</span></div>
-                 </div>
-                 <div class="event-details">
-                    <div class="event-name">BAR DO CABELO</div>
-                    <div class="event-location">Manaus - AM - 21:40 AM - R. Marquesa de Santos, 47 - Coroado</div>
-                 </div>
-                 <button class="event-button bg-black hover:bg-gray-600 cursor-default text-white">Finished</button>
-               </div>
-               <div class="date-item" data-aos="fade-up" data-aos-delay="150">
-                 <div class="date-info">
-                   <div class="day">19</div>
-                   <div class="month-year"><span class="month">APRIL</span><span class="year">2025</span></div>
-                 </div>
-                 <div class="event-details">
-                   <div class="event-name">GRINGOS BAR</div>
-                   <div class="event-location">Manaus - AM - 21:40 AM - Av. Eduardo Ribeiro, 926</div>
-                 </div>
-                 <button class="event-button bg-black hover:bg-gray-600 cursor-default text-white">Finished</button>
-               </div>
-               <div class="date-item opacity-80" data-aos="fade-up" data-aos-delay="200">
-                <div class="date-info">
-                  <div class="day">25</div>
-                  <div class="month-year"><span class="month">APRIL</span><span class="year">2025</span></div>
-                </div>
-                <div class="event-details">
-                  <div class="event-name">TEMPLO DO ROCK - ONDA DIGITAL</div>
-                  <div class="event-location">Manaus - AM - 21:00 AM - SINTONIZE NA 92.3 FM </div>
-                </div>
-                <button class="event-button bg-black hover:bg-gray-600 cursor-default text-white">Finished</button>
-              </div>
-            </div>
-        </div>
-        
+
         <!-- MÊS DE MAIO -->
         <div class="month-section mb-10 md:mb-16">
             <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-center mb-6 md:mb-10 tracking-wider text-soviet-purple" data-aos="fade-up" data-aos-delay="50">
-              Month of May
+              Mês de Maio
             </h3>
             <div class="max-w-4xl mx-auto space-y-4 md:space-y-5">
-               <div class="date-item opacity-80" data-aos="fade-up" data-aos-delay="200">
+               <div class="date-item" data-aos="fade-up" data-aos-delay="100">
+                   <div class="date-info">
+                     <div class="day">24</div>
+                     <div class="month-year"><span class="month">MAIO</span><span class="year">2025</span></div>
+                   </div>
+                   <div class="event-details">
+                     <div class="event-name">?????????????????</div>
+                     <div class="event-location">Manaus - AM - 19:00 AM</div>
+                   </div>
+                   <button class="event-button bg-gray-500 hover:bg-gray-600 cursor-default text-white">Info</button>
+               </div>
+               <div class="date-item" data-aos="fade-up" data-aos-delay="150">
                  <div class="date-info">
-                   <div class="day">10</div>
-                   <div class="month-year"><span class="month">MAY</span><span class="year">2025</span></div>
+                   <div class="day">25</div>
+                   <div class="month-year"><span class="month">MAIO</span><span class="year">2025</span></div>
                  </div>
                  <div class="event-details">
-                   <div class="event-name">ROCK DE QUINTAL</div>
-                   <div class="event-location">Manaus - AM - 00:00 AM - Rua Newton Vieira Alves - 183 - Novo Aleixo </div>
+                   <div class="event-name">WORLD GOTH DAY LIVE</div>
+                   <div class="event-location">Manaus - AM - 19:00 AM</div>
                  </div>
-                 <a href="https://www.sympla.com.br/evento/rock-de-quintal-volume-3/2921881?share_id=whatsapp&share_id=whatsapp" target="_blank" rel="noopener noreferrer" class="event-button bg-soviet-purple hover:bg-opacity-80">COMPRE SEU INGRESSO</a>
+                 <a href="https://www.youtube.com/@Sovietat" target="_blank" rel="noopener noreferrer" class="event-button bg-soviet-purple hover:bg-opacity-80">25 DE MAIO </a>
                </div>
-               <div class="date-item opacity-80" data-aos="fade-up" data-aos-delay="250">
-                <div class="date-info">
-                  <div class="day">25</div>
-                  <div class="month-year"><span class="month">MAY</span><span class="year">2025</span></div>
-                </div>
-                <div class="event-details">
-                  <div class="event-name">WORLD GOTH DAY LIVE</div>
-                  <div class="event-location">Manaus - AM - 19:00 AM</div>
-                </div>
-                <a href="https://www.youtube.com/@Sovietat" target="_blank" rel="noopener noreferrer" class="event-button bg-soviet-purple hover:bg-opacity-80">25 DE MAIO </a>
-              </div>
-              <div class="date-item opacity-80" data-aos="fade-up" data-aos-delay="250">
+               <div class="date-item" data-aos="fade-up" data-aos-delay="200">
                 <div class="date-info">
                   <div class="day">30</div>
-                  <div class="month-year"><span class="month">MAY</span><span class="year">2025</span></div>
+                  <div class="month-year"><span class="month">MAIO</span><span class="year">2025</span></div>
                 </div>
                 <div class="event-details">
                   <div class="event-name">CONVERSA DE BAR</div>
@@ -528,21 +500,21 @@
                 </div>
                 <a href="https://www.twitch.tv/MATHEUSKIEVAO" target="_blank" rel="noopener noreferrer" class="event-button bg-soviet-purple hover:bg-opacity-80">30 DE MAIO</a>
                </div>
-              <div class="date-item opacity-80" data-aos="fade-up" data-aos-delay="250">
+              <div class="date-item" data-aos="fade-up" data-aos-delay="250">
                 <div class="date-info">
                   <div class="day">31</div>
-                  <div class="month-year"><span class="month">MAY</span><span class="year">2025</span></div>
+                  <div class="month-year"><span class="month">MAIO</span><span class="year">2025</span></div>
                 </div>
                 <div class="event-details">
                   <div class="event-name">EVENTO CULTURAL</div>
                   <div class="event-location">Manaus - AM - 20:20 - R. dos Trevos, 320 - Jorge Teixeira 1, 69088-460</div>
                 </div>
-                <button class="event-button bg-black hover:bg-green-700 cursor-not-allowed text-white">Gratuito</button>
+                <button class="event-button bg-gray-500 hover:bg-gray-600 cursor-default text-white">Gratuito</button>
               </div>
-              <div class="date-item opacity-80" data-aos="fade-up" data-aos-delay="200">
+              <div class="date-item" data-aos="fade-up" data-aos-delay="300">
                <div class="date-info">
                  <div class="day">31</div>
-                 <div class="month-year"><span class="month">MAY</span><span class="year">2025</span></div>
+                 <div class="month-year"><span class="month">MAIO</span><span class="year">2025</span></div>
                </div>
                <div class="event-details">
                  <div class="event-name">PIRARUCRUROCK FESTIVAL</div>
@@ -550,161 +522,253 @@
                </div>
                <a href="https://www.instagram.com/omovimentocru/" target="_blank" rel="noopener noreferrer" class="event-button bg-soviet-purple hover:bg-opacity-80">COMPRE SEU INGRESSO</a>
              </div>
-             <div class="date-item opacity-80" data-aos="fade-up" data-aos-delay="200">
+             <div class="date-item" data-aos="fade-up" data-aos-delay="350">
                <div class="date-info">
                  <div class="day">31</div>
-                 <div class="month-year"><span class="month">MAY</span><span class="year">2025</span></div>
+                 <div class="month-year"><span class="month">MAIO</span><span class="year">2025</span></div>
                </div>
                <div class="event-details">
                  <div class="event-name">3° UNDERGROUND FESTIVAL</div>
                  <div class="event-location">23:55 - Santo Antônio, Manaus - AM, 69030-680</div>
                </div>
-               <button class="event-button bg-black hover:bg-green-700 cursor-not-allowed text-white">Gratuito</button>
+               <button class="event-button bg-gray-500 hover:bg-gray-600 cursor-default text-white">Gratuito</button>
              </div>
             </div>
         </div>
 
         <!-- MÊS DE JUNHO -->
         <div class="month-section mb-10 md:mb-16">
-            <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-center mb-6 md:mb-10 tracking-wider text-soviet-purple" data-aos="fade-up" data-aos-delay="100">
-              Month of June
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-center mb-6 md:mb-10 tracking-wider text-soviet-purple" data-aos="fade-up" data-aos-delay="50">
+              Mês de Junho
             </h3>
             <div class="max-w-4xl mx-auto space-y-4 md:space-y-5">
-               <div class="date-item opacity-80" data-aos="fade-up" data-aos-delay="250">
+               <div class="date-item" data-aos="fade-up" data-aos-delay="100">
                 <div class="date-info">
                   <div class="day">29</div>
-                  <div class="month-year"><span class="month">JUNE</span><span class="year">2025</span></div>
+                  <div class="month-year"><span class="month">JUNHO</span><span class="year">2025</span></div>
                 </div>
                 <div class="event-details">
                   <div class="event-name">ENSAIO ABERTO 1</div>
                   <div class="event-location">Manaus - AM - 14:00 AM</div>
                 </div>
-                <button class="event-button bg-black hover:bg-green-700 cursor-not-allowed text-white">Gratuito</button>
-              </div>         
-               <div class="date-item opacity-80" data-aos="fade-up" data-aos-delay="250">
+                <button class="event-button bg-gray-500 hover:bg-gray-600 cursor-default text-white">Gratuito</button>
+              </div>
+               <div class="date-item" data-aos="fade-up" data-aos-delay="150">
                 <div class="date-info">
                   <div class="day">21</div>
-                  <div class="month-year"><span class="month">JUNE</span><span class="year">2025</span></div>
+                  <div class="month-year"><span class="month">JUNHO</span><span class="year">2025</span></div>
                 </div>
                 <div class="event-details">
                   <div class="event-name">???????????</div>
                   <div class="event-location">Manaus - AM - 00:00 AM</div>
                 </div>
-                <button class="event-button bg-yellow-500 hover:bg-yellow-600 cursor-not-allowed text-black">Soon</button>
-              </div>         
+                <button class="event-button bg-yellow-500 hover:bg-yellow-600 cursor-default text-black">Em breve</button>
+              </div>
             </div>
         </div>
-        
+
         <!-- MÊS DE JULHO -->
         <div class="month-section mb-10 md:mb-16">
-            <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-center mb-6 md:mb-10 tracking-wider text-soviet-purple" data-aos="fade-up" data-aos-delay="150">
-              Month of July
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-center mb-6 md:mb-10 tracking-wider text-soviet-purple" data-aos="fade-up" data-aos-delay="50">
+              Mês de Julho
             </h3>
             <div class="max-w-4xl mx-auto space-y-4 md:space-y-5">
-               <div class="date-item opacity-80" data-aos="fade-up" data-aos-delay="250">
+               <div class="date-item" data-aos="fade-up" data-aos-delay="100">
+                   <div class="date-info">
+                     <div class="day">4</div>
+                     <div class="month-year"><span class="month">JULHO</span><span class="year">2025</span></div>
+                   </div>
+                   <div class="event-details">
+                     <div class="event-name">NOITE NEGRA NA FLORESTA</div>
+                     <div class="event-location">Manaus - AM - 00:00 AM</div>
+                   </div>
+                   <a href="https://www.sympla.com.br/evento/noite-negra-na-floresta/2962409?referrer=l.instagram.com" target="_blank" rel="noopener noreferrer" class="event-button bg-soviet-purple hover:bg-opacity-80">Sympla</a>
+               </div>
+               <div class="date-item" data-aos="fade-up" data-aos-delay="150">
                  <div class="date-info">
                    <div class="day">26</div>
-                   <div class="month-year"><span class="month">JULY</span><span class="year">2025</span></div>
+                   <div class="month-year"><span class="month">JULHO</span><span class="year">2025</span></div>
                  </div>
                  <div class="event-details">
                    <div class="event-name">ENSAIO ABERTO 2</div>
                    <div class="event-location">Manaus - AM - 14:00 AM</div>
                  </div>
-                 <button class="event-button bg-yellow-500 hover:bg-yellow-600 cursor-not-allowed text-black">Soon</button>
+                 <button class="event-button bg-yellow-500 hover:bg-yellow-600 cursor-default text-black">Em breve</button>
                </div>
             </div>
         </div>
 
         <!-- MÊS DE AGOSTO -->
         <div class="month-section mb-10 md:mb-16">
-            <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-center mb-6 md:mb-10 tracking-wider text-soviet-purple" data-aos="fade-up" data-aos-delay="200">
-              Month of August
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-center mb-6 md:mb-10 tracking-wider text-soviet-purple" data-aos="fade-up" data-aos-delay="50">
+              Mês de Agosto
             </h3>
             <div class="max-w-4xl mx-auto space-y-4 md:space-y-5">
-              <div class="date-item opacity-80" data-aos="fade-up" data-aos-delay="250">
+              <div class="date-item" data-aos="fade-up" data-aos-delay="100">
                 <div class="date-info">
                   <div class="day">23</div>
-                  <div class="month-year"><span class="month">AUGUST</span><span class="year">2025</span></div>
-                </div>  
+                  <div class="month-year"><span class="month">AGOSTO</span><span class="year">2025</span></div>
+                </div>
                 <div class="event-details">
                   <div class="event-name">CICADA 3301</div>
                   <div class="event-location">22:00 AM - Av. Des. João Machado, 6705 - Alvorada, Manaus - AM, 69058-795</div>
                 </div>
                 <a target="_blank" rel="noopener noreferrer" class="event-button bg-soviet-purple hover:bg-opacity-80">EM BREVE</a>
               </div>
-              <div class="date-item opacity-80" data-aos="fade-up" data-aos-delay="250">
+              <div class="date-item" data-aos="fade-up" data-aos-delay="150">
                 <div class="date-info">
                   <div class="day">30</div>
-                  <div class="month-year"><span class="month">AUGUST</span><span class="year">2025</span></div>
+                  <div class="month-year"><span class="month">AGOSTO</span><span class="year">2025</span></div>
                 </div>
                 <div class="event-details">
                   <div class="event-name">ENSAIO ABERTO 3</div>
                   <div class="event-location">Manaus - AM - 14:00 AM</div>
                 </div>
-                <button class="event-button bg-black hover:bg-green-700 cursor-not-allowed text-white">Gratuito</button>
+                <button class="event-button bg-gray-500 hover:bg-gray-600 cursor-default text-white">Gratuito</button>
               </div>
             </div>
         </div>
-        
+
         <!-- MÊS DE SETEMBRO -->
-        <div class="month-section">
-            <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-center mb-6 md:mb-10 tracking-wider text-soviet-purple" data-aos="fade-up" data-aos-delay="250">
-              Month of September
+        <div class="month-section mb-10 md:mb-16">
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-center mb-6 md:mb-10 tracking-wider text-soviet-purple" data-aos="fade-up" data-aos-delay="50">
+              Mês de Setembro
             </h3>
             <div class="max-w-4xl mx-auto space-y-4 md:space-y-5">
-                <div class="date-item opacity-80" data-aos="fade-up" data-aos-delay="250">
-                  <div class="date-info">
-                    <div class="day">27</div>
-                    <div class="month-year"><span class="month">SEP</span><span class="year">2025</span></div>
-                  </div>
-                  <div class="event-details">
-                    <div class="event-name">ENSAIO ABERTO 4</div>
-                    <div class="event-location">Manaus - AM - 14:00 AM</div>
-                  </div>
-                  <button class="event-button bg-black hover:bg-green-700 cursor-not-allowed text-white">Gratuito</button>
-                </div>
-                <div class="date-item opacity-80" data-aos="fade-up" data-aos-delay="250">
+                <div class="date-item" data-aos="fade-up" data-aos-delay="100">
                   <div class="date-info">
                     <div class="day">??</div>
-                    <div class="month-year"><span class="month">SEP</span><span class="year">2025</span></div>
+                    <div class="month-year"><span class="month">SET</span><span class="year">2025</span></div>
                   </div>
                   <div class="event-details">
                     <div class="event-name">?????????</div>
                     <div class="event-location">Manaus - AM - 00:00 AM</div>
                   </div>
-                  <button class="event-button bg-yellow-500 hover:bg-yellow-600 cursor-not-allowed text-black">Soon</button>
+                  <button class="event-button bg-yellow-500 hover:bg-yellow-600 cursor-default text-black">Em breve</button>
                 </div>
-                <div class="date-item opacity-80" data-aos="fade-up" data-aos-delay="250">
+                <div class="date-item" data-aos="fade-up" data-aos-delay="150">
                   <div class="date-info">
                     <div class="day">??</div>
-                    <div class="month-year"><span class="month">SEP</span><span class="year">2025</span></div>
+                    <div class="month-year"><span class="month">SET</span><span class="year">2025</span></div>
                   </div>
                   <div class="event-details">
                     <div class="event-name">?????????</div>
                     <div class="event-location">Manaus - AM - 00:00 AM</div>
                   </div>
-                  <button class="event-button bg-yellow-500 hover:bg-yellow-600 cursor-not-allowed text-black">Soon</button>
+                  <button class="event-button bg-yellow-500 hover:bg-yellow-600 cursor-default text-black">Em breve</button>
                 </div>
-                <div class="date-item opacity-80" data-aos="fade-up" data-aos-delay="250">
+                <div class="date-item" data-aos="fade-up" data-aos-delay="200">
                   <div class="date-info">
                     <div class="day">??</div>
-                    <div class="month-year"><span class="month">SEP</span><span class="year">2025</span></div>
+                    <div class="month-year"><span class="month">SET</span><span class="year">2025</span></div>
                   </div>
                   <div class="event-details">
                     <div class="event-name">?????????</div>
                     <div class="event-location">Manaus - AM - 00:00 AM</div>
                   </div>
-                  <button class="event-button bg-yellow-500 hover:bg-yellow-600 cursor-not-allowed text-black">Soon</button>
+                  <button class="event-button bg-yellow-500 hover:bg-yellow-600 cursor-default text-black">Em breve</button>
                 </div>
-            </div>
+              </div>
+          </div>
+
+           <!-- MÊS DE OUTUBRO -->
+        <div class="month-section mb-10 md:mb-16">
+          <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-center mb-6 md:mb-10 tracking-wider text-soviet-purple" data-aos="fade-up" data-aos-delay="50">
+            Mês de Outubro
+          </h3>
+          <div class="max-w-4xl mx-auto space-y-4 md:space-y-5">
+              <div class="date-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="date-info">
+                  <div class="day">25</div>
+                  <div class="month-year"><span class="month">OUT</span><span class="year">2025</span></div>
+                </div>
+                <div class="event-details">
+                  <div class="event-name">VAMPIRE CLUB 2 EDICAO</div>
+                  <div class="event-location">Manaus - AM - 19:00 AM</div>
+                </div>
+                 <button class="event-button bg-gray-500 hover:bg-gray-600 cursor-default text-white">Info</button>
+              </div>
+           </div>
         </div>
+
+         <!-- MÊS DE NOVEMBRO -->
+         <div class="month-section mb-10 md:mb-16">
+             <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-center mb-6 md:mb-10 tracking-wider text-soviet-purple" data-aos="fade-up" data-aos-delay="50">
+               Mês de Novembro
+             </h3>
+             <div class="max-w-4xl mx-auto space-y-4 md:space-y-5">
+                <div class="date-item" data-aos="fade-up" data-aos-delay="100">
+                 <div class="date-info">
+                   <div class="day">27</div>
+                   <div class="month-year"><span class="month">NOV</span><span class="year">2025</span></div>
+                 </div>
+                 <div class="event-details">
+                   <div class="event-name">ENSAIO ABERTO 4</div>
+                   <div class="event-location">Manaus - AM - 14:00 AM</div>
+                 </div>
+                 <button class="event-button bg-gray-500 hover:bg-gray-600 cursor-default text-white">Gratuito</button>
+               </div>
+             </div>
+         </div>
+
+         <!-- MÊS DE DEZEMBRO -->
+         <div class="month-section">
+             <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-center mb-6 md:mb-10 tracking-wider text-soviet-purple" data-aos="fade-up" data-aos-delay="50">
+               Mês de Dezembro
+             </h3>
+             <div class="max-w-4xl mx-auto space-y-4 md:space-y-5">
+                 <div class="date-item" data-aos="fade-up" data-aos-delay="100">
+                   <div class="date-info">
+                     <div class="day">5</div>
+                     <div class="month-year"><span class="month">DEZ</span><span class="year">2025</span></div>
+                   </div>
+                   <div class="event-details">
+                     <div class="event-name">?????????</div>
+                     <div class="event-location">??????? - ?? - 14:00 AM</div>
+                   </div>
+                   <button class="event-button bg-gray-500 hover:bg-gray-600 cursor-default text-white">Gratuito</button>
+                 </div>
+                 <div class="date-item" data-aos="fade-up" data-aos-delay="150">
+                   <div class="date-info">
+                     <div class="day">6</div>
+                     <div class="month-year"><span class="month">DEZ</span><span class="year">2025</span></div>
+                   </div>
+                   <div class="event-details">
+                     <div class="event-name">?????????</div>
+                     <div class="event-location">??????? - ?? - 14:00 AM</div>
+                   </div>
+                   <button class="event-button bg-gray-500 hover:bg-gray-600 cursor-default text-white">Gratuito</button>
+                 </div>
+                 <div class="date-item" data-aos="fade-up" data-aos-delay="200">
+                   <div class="date-info">
+                     <div class="day">7</div>
+                     <div class="month-year"><span class="month">DEZ</span><span class="year">2025</span></div>
+                   </div>
+                   <div class="event-details">
+                     <div class="event-name">?????????</div>
+                     <div class="event-location">??????? - ?? - 14:00 AM</div>
+                   </div>
+                   <button class="event-button bg-gray-500 hover:bg-gray-600 cursor-default text-white">Gratuito</button>
+                 </div>
+               </div>
+           </div>
+
 
       </div>
     </section>
 
     <section class="quote-section" data-aos="fade-in">
-      ‘’Soviet At's music has such an enigmatic and captivating aura that it makes you want to be inside that universe, as if you were part of the sonic spell itself.‘’
+      ‘’Soviet At - Show Completo; Manaus, AM 6/29/24‘’
     </section>
+
+    <section class="py-16 md:py-24 lg:py-29 bg-black">
+        <div class="container mx-auto px-4 sm:px-6" data-aos="zoom-in-up" data-aos-duration="1000">
+            <div class="max-w-5xl mx-auto rounded-xl md:rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl aspect-w-16 aspect-h-9">
+                <iframe src="https://www.youtube.com/embed/7kUDbiTaV8k?start=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
 
     <section id="album" class="py-16 md:py-24 lg:py-32 bg-black text-center">
         <div class="container mx-auto px-4 sm:px-6">
