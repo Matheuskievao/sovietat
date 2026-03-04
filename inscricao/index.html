@@ -140,77 +140,185 @@
 </head>
 <body class="bg-black text-white font-poppins">
 
-    <!-- Header (Same as before) -->
-    <header class="sticky top-0 z-50 bg-black bg-opacity-80 backdrop-blur-sm shadow-md py-4">
-      <div class="container mx-auto px-6 flex justify-between items-center">
-        <a href="/" class="flex items-center space-x-2 flex-shrink-0">
-          <img class="w-auto h-8 md:h-10 animate-logo-pulse" src="img/metalic-logo-mockup-20.png" alt="Soviet At Logo" />
-        </a>
-        <div class="hidden lg:flex items-center space-x-6">
-            <nav class="flex items-center space-x-6 text-sm tracking-[1.5px]">
-              <a href="/" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">HOME</a>
-              <!-- <a href="/#merch" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">MERCH</a>
-              <a href="/#about" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">ABOUT</a>-->
-              <a href="/midia" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">TOUR</a>
-              <a href="/inscricao" class="text-soviet-purple font-semibold opacity-100 transition-opacity duration-300">INSCRIÇÃO</a><!--
-              <a href="https://sovietat.com.br/sovietrecords"" class="text-soviet-blue opacity-70 hover:opacity-100 transition-opacity duration-300">SOVIETRECORDS</a>-->
-            </nav>
-            <a href="https://open.spotify.com/track/3QNQQPYQjESv0AC19TL0aw" target="_blank" rel="noopener noreferrer"
-               class="header-spotify-player-test bg-white-500 p-2 rounded-full flex items-center gap-1" title="Listen on Spotify">
-                <svg class="w-4 h-4 block" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <title>Soviet at</title>
-                    <path fill="#00FF00" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm6.214 17.51c-.204.32-.58.433-.9.232-2.637-1.623-5.902-1.99-10.165-1.087-.39.09-.76-.126-.848-.514-.09-.39.126-.76.514-.848C11.47 14.39 15.11 14.794 18.08 16.64c.32.2.434.58.233.9zm.877-2.364c-.247.386-.7.517-1.086.27-3.04-1.86-7.015-2.41-11.61-.126-.454.09-.91-.16-.998-.616-.09-.455.16-.91.615-.998 5.137-2.496 9.596-1.84 12.99 1.454.386.246.516.7.27 1.086zm.11-2.58c-.31.473-.876.617-1.35.307C14.28 10.69 9.75 10.376 5.756 11.54c-.51.153-1.043-.12-1.195-.633-.153-.51.12-1.044.633-1.196 4.573-1.366 9.724-1.016 13.96 1.687.473.31.616.877.306 1.35z"/>
-                </svg>
-                <span class="text-white text-xs font-bold">Soviet at</span>
-            </a>
+     <header class="sticky top-0 z-50 bg-black bg-opacity-80 backdrop-blur-sm shadow-md py-4">
+      <div class="container mx-auto px-6">
+        <div class="flex justify-between items-center">
+          <a href="/" class="flex items-center space-x-2 flex-shrink-0">
+            <img class="w-auto h-8 md:h-10 animate-logo-pulse" src="img/metalic-logo-mockup-20.png" alt="Soviet At Logo" />
+          </a>
+
+          <div class="hidden lg:flex items-center space-x-6">
+              <nav class="flex items-center space-x-6 text-sm tracking-[1.5px]">
+                <a href="/" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">HOME</a>
+                <!-- <a href="/#merch" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">MERCH</a>
+                <a href="/#about" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">ABOUT</a>-->
+                <a href="/midia" class="text-white opacity-70 hover:opacity-100 transition-opacity duration-300">TOUR</a>
+                <a href="/inscricao" class="text-soviet-purple font-semibold opacity-100 transition-opacity duration-300">INSCRIÇÃO</a><!--
+                <a href="https://sovietat.com.br/sovietrecords"" class="text-soviet-blue opacity-70 hover:opacity-100 transition-opacity duration-300">SOVIETRECORDS</a>-->
+              </nav>
+              <a href="https://open.spotify.com/track/3QNQQPYQjESv0AC19TL0aw" target="_blank" rel="noopener noreferrer"
+                 class="header-spotify-player-test bg-white-500 p-2 rounded-full flex items-center gap-1" title="Listen on Spotify">
+                  <svg class="w-4 h-4 block" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <title>Soviet at</title>
+                      <path fill="#00FF00" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm6.214 17.51c-.204.32-.58.433-.9.232-2.637-1.623-5.902-1.99-10.165-1.087-.39.09-.76-.126-.848-.514-.09-.39.126-.76.514-.848C11.47 14.39 15.11 14.794 18.08 16.64c.32.2.434.58.233.9zm.877-2.364c-.247.386-.7.517-1.086.27-3.04-1.86-7.015-2.41-11.61-.126-.454.09-.91-.16-.998-.616-.09-.455.16-.91.615-.998 5.137-2.496 9.596-1.84 12.99 1.454.386.246.516.7.27 1.086zm.11-2.58c-.31.473-.876.617-1.35.307C14.28 10.69 9.75 10.376 5.756 11.54c-.51.153-1.043-.12-1.195-.633-.153-.51.12-1.044.633-1.196 4.573-1.366 9.724-1.016 13.96 1.687.473.31.616.877.306 1.35z"/>
+                  </svg>
+                  <span class="text-white text-xs font-bold">Soviet at</span>
+              </a>
+          </div>
+
+          <button
+            id="mobile-menu-button"
+            class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md border border-soviet-footer-border text-white"
+            type="button"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+            aria-label="Toggle navigation menu"
+          >
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16"></path>
+            </svg>
+          </button>
         </div>
-         <!-- TODO: Add Mobile Menu Button Here if needed -->
+
+        <div id="mobile-menu" class="hidden lg:hidden mt-4 border-t border-soviet-footer-border pt-4">
+          <nav class="flex flex-col gap-3 text-sm tracking-[1.5px]">
+            <a href="/" class="text-white opacity-80 hover:opacity-100 transition-opacity duration-300">HOME</a>
+            <a href="/midia" class="text-white opacity-80 hover:opacity-100 transition-opacity duration-300">TOUR</a>
+            <a href="/inscricao" class="text-soviet-purple font-semibold opacity-100 transition-opacity duration-300">INSCRIÇÃO</a>
+          </nav>
+        </div>
+      </div>
     </header>
 
-<!-- Main Content Area for Contact -->
+  <section id="page-banner" class="w-full bg-black">
+    <div class="container mx-auto px-6 pt-4 md:pt-6">
+      <div class="overflow-hidden rounded-xl border border-soviet-footer-border">
+        <img
+          src="img/img1.png"
+          alt="Banner animado Soviet At"
+          class="w-full h-[1080px] md:h-[1800px] lg:h-[340px] object-cover"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </section>
+
   <main>
-    <section id="contact-section" class="py-20 md:py-32 bg-black">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-semibold text-center mb-12 md:mb-16" data-aos="fade-up">
-                INSCRIÇÃO
-            </h2>
+  <section id="contact-section" class="py-20 md:py-32 bg-black">
+    <div class="container mx-auto px-6">
 
-            <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-16">
+      <!-- TÍTULO -->
+      <h2
+        class="text-4xl md:text-5xl font-semibold text-center mb-12 md:mb-16"
+        data-aos="fade-up"
+      >
+        INSCRIÇÃO
+      </h2>
 
-                <div class="w-full lg:w-2/3 xl:w-1/2 mx-auto lg:mx-0" data-aos="fade-right" data-aos-delay="100">
-                    <h3 class="text-2xl font-semibold mb-6">INSCRIÇÃO</h3>
+      <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-16">
 
-                    <form id="contact-form" action="https://formspree.io/f/xyzedqzp" method="POST">
+        <!-- FORMULÁRIO -->
+        <div
+          class="w-full lg:w-2/3 xl:w-1/2 mx-auto lg:mx-0"
+          data-aos="fade-right"
+          data-aos-delay="100"
+        >
+          <h3 class="text-2xl font-semibold mb-6">
+            Formulário de Inscrição
+          </h3>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                            <div>
-                                <label for="name" class="block text-soviet-gray-light text-sm font-medium mb-2">@instagram</label>
-                                <input type="text" id="name" name="name" required placeholder="@perfil">
-                            </div>
-                            <div>
-                                <label for="email" class="block text-soviet-gray-light text-sm font-medium mb-2">Email</label>
-                                <input type="email" id="email" name="_replyto" required placeholder="your.email@example.com">
-                            </div>
-                        </div>
-                         <div class="mb-6">
-                             <label for="subject" class="block text-soviet-gray-light text-sm font-medium mb-2">Numero de contato</label>
-                             <input type="text" id="subject" name="subject" placeholder="+55 (00) 00000-0000">
-                         </div>
-                        <div class="mb-8">
-                            <label for="message" class="block text-soviet-gray-light text-sm font-medium mb-2">Qual seria a sua disponibilidade de horarios?</label>
-                            <textarea id="message" name="message" rows="5" required placeholder="  No diga aqui"></textarea>
-                        </div>
-                        <div>
-                            <button type="submit" class="bg-soviet-purple hover:bg-opacity-80 text-white font-semibold py-3 px-8 rounded-md transition duration-300 w-full md:w-auto">
-                                Send Message
-                            </button>
-                        </div>
+          <form
+            id="contact-form"
+            action="https://formspree.io/f/xbdangbb"
+            method="POST"
+            enctype="multipart/form-data"
+            class="space-y-6"
+          >
 
-                        <!-- *** ADDED STATUS MESSAGE AREA *** -->
-                        <div id="contact-status" class="hidden"></div>
+            <!-- INSTAGRAM + EMAIL -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label
+                  for="instagram"
+                  class="block text-soviet-gray-light text-sm font-medium mb-2"
+                >
+                  Instagram
+                </label>
+                <input
+                  type="text"
+                  id="instagram"
+                  name="instagram"
+                  required
+                  placeholder="@seuperfil"
+                />
+              </div>
 
-                    </form>
-                </div>
+              <div>
+                <label
+                  for="email"
+                  class="block text-soviet-gray-light text-sm font-medium mb-2"
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="_replyto"
+                  required
+                  placeholder="seu@email.com"
+                />
+              </div>
+            </div>
+
+            <!-- CONTATO -->
+            <div>
+              <label
+                for="phone"
+                class="block text-soviet-gray-light text-sm font-medium mb-2"
+              >
+                Número de contato
+              </label>
+              <input
+                type="text"
+                id="phone"
+                name="phone"
+                placeholder="+55 (00) 00000-0000"
+              />
+            </div>
+
+            <!-- DISPONIBILIDADE -->
+            <div>
+              <label
+                for="availability"
+                class="block text-soviet-gray-light text-sm font-medium mb-2"
+              >
+                Qual sua disponibilidade de horários?
+              </label>
+              <textarea
+                id="availability"
+                name="availability"
+                rows="5"
+                required
+                placeholder="  Ex: domingos à tarde, quintas à noite..."
+              ></textarea>
+            </div>
+
+            <!-- BOTÃO -->
+            <div class="pt-4">
+              <button
+                type="submit"
+                class="bg-soviet-purple hover:bg-opacity-80 text-white font-semibold py-3 px-8 rounded-md transition duration-300 w-full md:w-auto"
+              >
+                Enviar inscrição
+              </button>
+            </div>
+
+            <!-- STATUS -->
+            <div id="contact-status" class="hidden"></div>
+
+          </form>
+        </div>
 
                 <!-- Contact Details (Adjusted width slightly) -->
                 <div class="w-full lg:w-1/3 xl:w-1/2 mx-auto lg:mx-0" data-aos="fade-left" data-aos-delay="200">
@@ -288,6 +396,17 @@
         duration: 800,
         once: true,
     });
+
+    var mobileMenuButton = document.getElementById("mobile-menu-button");
+    var mobileMenu = document.getElementById("mobile-menu");
+
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener("click", function () {
+        var isHidden = mobileMenu.classList.contains("hidden");
+        mobileMenu.classList.toggle("hidden");
+        mobileMenuButton.setAttribute("aria-expanded", isHidden ? "true" : "false");
+      });
+    }
 
     // --- NEW: Formspree AJAX Submission Handling ---
     var form = document.getElementById("contact-form");
